@@ -1,0 +1,8 @@
+{
+  "$schema": "https://raw.githubusercontent.com/adonisjs/sink/develop/instructions.schema.json",
+  "adonisjs": {
+    "commands": ["@sh8gh/adonis-rapid/src/command"],
+    "providers": ["@sh8gh/adonis-rapid/src/RapidProvider"],
+    "types": "@sh8gh/adonis-rapid"
+  }
+}
