@@ -1,14 +1,14 @@
 {
   "name": "adonis-rapid",
   "description": "an redundent free auth/database/user-management configuration for adonisjs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/SH8GH/adonis-rapid.git"
   },
   "adonisjs": {
-    "commands": ["adonis-rapid/src/command/RapidInstall"],
-    "providers": ["adonis-rapid/src/RapidProvider"],
+    "commands": ["adonis-rapid/build/src/command/RapidInstall"],
+    "providers": ["adonis-rapid/build/src/RapidProvider"],
     "types": "adonis-rapid"
   },
   "private": false,
