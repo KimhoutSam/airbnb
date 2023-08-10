@@ -1,5 +1,5 @@
 # Adonis Rapid
-> an redundent free auth/database configuration for adonisjs
+> an redundent free auth/database/user-management configuration for adonisjs
 
 [![npm-image]][npm-url] [![license-image]][license-url] [![typescript-image]][typescript-url]
 

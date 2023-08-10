@@ -1,4 +1,24 @@
 {
+  "name": "@sh8gh/adonis-rapid",
+  "description": "an redundent free auth/database/user-management configuration for adonisjs",
+  "version": "0.0.0-alpha",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/SH8GH/adonis-rapid.git"
+  },
+  "keywords": [
+    "template",
+    "setup",
+    "adonis",
+    "adonisjs",
+    "jetstream",
+    "presets"
+  ],
+  "author": "SamKimhout <samkimhout@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/SH8GH/adonis-rapid/issues"
+  },
+  "homepage": "https://github.com/SH8GH/adonis-rapid#readme",
   "devDependencies": {
     "@adonisjs/auth": "^8.2.3",
     "@adonisjs/core": "^5.9.0",
@@ -81,7 +101,8 @@
     }
   },
   "eslintIgnore": [
-    "build"
+    "build",
+    "node_modules"
   ],
   "prettier": {
     "trailingComma": "es5",

@@ -5,6 +5,8 @@
     "paths": {
       "Src/*": ["./src/*"]
     },
-    "experimentalDecorators": true
-  }
+    "experimentalDecorators": true,
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules", "build"]
 }
