@@ -1,6 +1,9 @@
 declare module 'adonis-rapid' {
   import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-  enum Features {}
+
+  enum Features {
+    enableLoginView = 'enable-login-view',
+  }
 
   type CallbackAction<TData = {}> = (context: HttpContextContract, data: TData) => any
 

@@ -1,5 +1,5 @@
 import type { ApplicationContract } from '@ioc:Adonis/Core/Application'
-import type { RapidConfig } from '@sh8gh/adonis-rapid'
+import type { RapidConfig } from 'adonis-rapid'
 
 export default class RapidProvider {
   constructor(protected app: ApplicationContract) {}
