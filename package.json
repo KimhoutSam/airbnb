@@ -6,6 +6,12 @@
     "type": "git",
     "url": "git+ssh://git@github.com/SH8GH/adonis-rapid.git"
   },
+  "adonisjs": {
+    "commands": ["@sh8gh/adonis-rapid/src/command"],
+    "providers": ["@sh8gh/adonis-rapid/src/RapidProvider"],
+    "types": "@sh8gh/adonis-rapid"
+  },
+  "private": false,
   "keywords": [
     "template",
     "setup",
