@@ -35,22 +35,22 @@ export default {
 ```
 
 ## Todo
-- [] Upload Package To Npm For Test With Real World Adonis App
-- [] Login View
-- [] Register View
-- [] Forgot Password View
-- [] Reset Password View
-- [] Two Factor Challenge View
-- [] Verify Email View
-- [] All Of View Functionality
-- [] Add All Of Top With Inertia
-- [] Manipulated User Model
-- [] Write Document
+- [x] Upload Package To Npm For Test With Real World Adonis App
+- [ ] Login View
+- [ ] Register View
+- [ ] Forgot Password View
+- [ ] Reset Password View
+- [ ] Two Factor Challenge View
+- [ ] Verify Email View
+- [ ] All Of View Functionality
+- [ ] Add All Of Top With Inertia
+- [ ] Manipulated User Model
+- [ ] Write Document
 
-## Thank to
+## Specials Thank to
 
-- Laravel Jetstream For Idea
-- Adonisjs Teams
+- [Laravel Jetstream](https://jetstream.laravel.com/)
+- [Adonisjs Teams](https://adonisjs.com/)
 
 [npm-image]: https://img.shields.io/npm/v/adonis-rapid.svg?style=for-the-badge&logo=npm
 [npm-url]: https://npmjs.org/package/adonis-rapid "npm"
