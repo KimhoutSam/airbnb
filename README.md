@@ -8,9 +8,9 @@ A package for auto add authenticated pre-config plus if you using inertia from `
 ## Installation
 
 ```bash
-yarn add @sh8gh/adonis-rapid
+yarn add adonis-rapid
 
-node ace configure @sh8gh/adonis-rapid
+node ace configure adonis-rapid
 
 # for inertia
 node ace rapid:install inertia
