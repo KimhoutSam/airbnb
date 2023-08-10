@@ -27,6 +27,7 @@
     "husky": "^8.0.3",
     "mrm": "^4.1.17",
     "np": "^8.0.4",
+    "pino-std-serializers": "^6.2.2",
     "prettier": "^3.0.1",
     "typescript": "^5.1.6"
   },
