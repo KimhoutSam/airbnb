@@ -7,7 +7,7 @@
     "url": "git+ssh://git@github.com/SH8GH/adonis-rapid.git"
   },
   "adonisjs": {
-    "commands": ["adonis-rapid/src/command"],
+    "commands": ["adonis-rapid/src/command/RapidInstall"],
     "providers": ["adonis-rapid/src/RapidProvider"],
     "types": "adonis-rapid"
   },
