@@ -7,9 +7,15 @@
     "url": "git+ssh://git@github.com/SH8GH/adonis-rapid.git"
   },
   "adonisjs": {
-    "commands": ["adonis-rapid/build/src/command/RapidInstall"],
-    "providers": ["adonis-rapid/build/src/RapidProvider"],
-    "types": "adonis-rapid"
+    "commands": [
+      "adonis-rapid/build/src/command/RapidInstall"
+    ],
+    "providers": [
+      "adonis-rapid/build/src/RapidProvider"
+    ],
+    "types": "adonis-rapid/build/src/contract",
+    "instructions": "adonis-rapid/build/src/instructions",
+    "instructionsMd": "adonis-rapid/build/src/instructions"
   },
   "private": false,
   "keywords": [
@@ -128,5 +134,8 @@
   "np": {
     "contents": ".",
     "anyBranch": false
+  },
+  "dependencies": {
+    "@adonisjs/sink": "^5.4.3"
   }
 }

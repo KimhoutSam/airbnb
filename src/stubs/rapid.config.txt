@@ -1,0 +1,30 @@
+import { RapidConfig } from 'adonis-rapid'
+// import { Features } from 'adonis-rapid'
+
+const rapid: RapidConfig = {
+  /*
+  |--------------------------------------------------------------------------
+  | Rapid Type
+  |--------------------------------------------------------------------------
+  |
+  | Types that rapid should run
+  |
+  | Setting the value to `inertia` when you using inertia
+  | Setting the value to `static` when you using default template
+  |
+  */
+  types: 'inertia',
+
+  /*
+  |--------------------------------------------------------------------------
+  | Rapid Features
+  |--------------------------------------------------------------------------
+  |
+  | Feature List that let Rapid should enable/disable
+  | List of features is `Features` enum import from `adonis-rapid`
+  |
+  */
+  features: [],
+}
+
+export default rapid

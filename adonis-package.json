@@ -1,8 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/adonisjs/sink/develop/instructions.schema.json",
   "adonisjs": {
-    "commands": ["@sh8gh/adonis-rapid/src/command"],
-    "providers": ["@sh8gh/adonis-rapid/src/RapidProvider"],
-    "types": "@sh8gh/adonis-rapid"
+    "commands": ["adonis-rapid/build/src/command/RapidInstall"],
+    "providers": ["adonis-rapid/build/src/RapidProvider"],
+    "types": "adonis-rapid/build/src/contract",
+    "instructions": "adonis-rapid/build/src/instructions",
+    "instructionsMd": "adonis-rapid/build/src/instructions"
   }
 }

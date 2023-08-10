@@ -1,4 +1,4 @@
-declare module '@sh8gh/adonis-rapid' {
+declare module 'adonis-rapid' {
   import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
   enum Features {}
 
@@ -15,7 +15,7 @@ declare module '@sh8gh/adonis-rapid' {
 }
 
 declare module '@ioc:Adonis/Core/Application' {
-  import { RapidCoreContract } from '@sh8gh/adonis-rapid'
+  import { RapidCoreContract } from 'adonis-rapid'
 
   interface ContainerBindings {
     'SH8GH/Rapid/Core': RapidCoreContract
