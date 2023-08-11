@@ -14,7 +14,7 @@ declare module 'adonis-rapid' {
     data: TData
   ) => any | Promise<any>
 
-  type RendererKey = 'login'
+  type RendererKey = 'login' | 'register'
 
   interface RapidConfig {
     types: 'inertia' | 'static'
@@ -23,17 +23,37 @@ declare module 'adonis-rapid' {
 
   interface RapidConfiguratorContract {
     config: RapidConfig
+
     getLoginRenderer(): CallbackAction<{
       rapid: {
         password: any
         uid: any
       }
     }>
+
+    getRegisterRenderer(): CallbackAction<{
+      rapid: {
+        password: any
+        uid: any
+        confirm: any
+      }
+    }>
+
     LoginRenderer(
       action: CallbackAction<{
         rapid: {
           password: any
           uid: any
+        }
+      }>
+    ): void
+
+    RegisterRenderer(
+      action: CallbackAction<{
+        rapid: {
+          password: any
+          uid: any
+          confirm: any
         }
       }>
     ): void
