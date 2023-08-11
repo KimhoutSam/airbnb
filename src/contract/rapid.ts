@@ -5,22 +5,49 @@ declare module 'adonis-rapid' {
     enableLoginView = 'enable-login-view',
   }
 
-  type CallbackAction<TData = {}> = (context: HttpContextContract, data: TData) => any
+  interface ControllerConstruct<TController> {
+    new (): TController
+  }
+
+  interface MiddlewareConstruct<TMiddleware> {
+    new (): TMiddleware
+  }
+
+  type CallbackAction<TData = {}> = (
+    context: HttpContextContract,
+    data: TData
+  ) => any | Promise<any>
+
+  type RendererKey = 'login'
 
   interface RapidConfig {
     types: 'inertia' | 'static'
     features: Features[]
   }
 
-  interface RapidCoreContract {
+  interface RapidConfiguratorContract {
     config: RapidConfig
+    getLoginRenderer(): CallbackAction<{
+      rapid: {
+        password: any
+        uid: any
+      }
+    }>
+    LoginRenderer(
+      action: CallbackAction<{
+        rapid: {
+          password: any
+          uid: any
+        }
+      }>
+    ): void
   }
 }
 
 declare module '@ioc:Adonis/Core/Application' {
-  import { RapidCoreContract } from 'adonis-rapid'
+  import { RapidConfiguratorContract } from 'adonis-rapid'
 
   interface ContainerBindings {
-    'SH8GH/Rapid/Core': RapidCoreContract
+    'SH8GH/Rapid/Configurator': RapidConfiguratorContract
   }
 }

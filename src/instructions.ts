@@ -6,5 +6,21 @@ export default async function instructions(
   app: ApplicationContract,
   sink: typeof sinkStatic
 ) {
-  console.log({ projectRoot, sink, app })
+  const {
+    files,
+    getPrompt,
+    instructions,
+    isInteractive,
+    logger,
+    sinkVersion,
+    sticker,
+    supportsColors,
+    table,
+    tasks,
+    tasksUi,
+    testingRenderer,
+    utils,
+  } = sink
+
+  const packagedotjson = new files.PackageJsonFile(projectRoot)
 }
