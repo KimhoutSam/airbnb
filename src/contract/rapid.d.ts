@@ -1,9 +1,6 @@
 declare module 'adonis-rapid' {
+  import { Features } from '../types'
   import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-
-  enum Features {
-    enableLoginView = 'enable-login-view',
-  }
 
   interface ControllerConstruct<TController> {
     new (): TController

@@ -14,9 +14,9 @@ export default class RapidInstall extends BaseCommand {
   @args.string({
     name: 'template',
     required: false,
-    description: 'setup as inertia or adonis template (edge-js)',
+    description: 'setup as inertia or static or api (right now only static)',
   })
-  public template = 'template'
+  public template: 'static' | 'inertia' | 'api' = 'static'
 
   public static settings = {
     /**
@@ -35,6 +35,8 @@ export default class RapidInstall extends BaseCommand {
   }
 
   public async run() {
-    this.logger.info('Hello world!')
+    if (this.template === 'static') {
+      this.application.configPath('')
+    }
   }
 }
