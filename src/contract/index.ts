@@ -1,4 +1,4 @@
-/// <reference path="./rapid.d.ts" />
+/// <reference path="./rapid.ts" />
 /// <reference path="./core.ts" />
 /// <reference types="@adonisjs/core" />
 /// <reference types="@adonisjs/view" />

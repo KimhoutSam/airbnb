@@ -1,5 +1,4 @@
 declare module 'adonis-rapid' {
-  import { Features } from '../types'
   import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
   interface ControllerConstruct<TController> {
@@ -19,7 +18,7 @@ declare module 'adonis-rapid' {
 
   interface RapidConfig {
     types: 'inertia' | 'static'
-    features: Features[]
+    features: import('../types').Features[]
   }
 
   interface RapidConfiguratorContract {
