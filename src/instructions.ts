@@ -2,8 +2,8 @@ import type { ApplicationContract } from '@ioc:Adonis/Core/Application'
 import * as sinkStatic from '@adonisjs/sink'
 
 export default async function instructions(
-  projectRoot: string,
-  app: ApplicationContract,
+  _projectRoot: string,
+  _app: ApplicationContract,
   sink: typeof sinkStatic
 ) {
   const answer = await sink.getPrompt().multiple('start configuration rapid', [
@@ -14,4 +14,6 @@ export default async function instructions(
       message: 'install application as inertia or static or api',
     },
   ])
+
+  console.log(answer)
 }
