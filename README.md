@@ -34,6 +34,23 @@ export default {
 }
 ```
 
+> want to override the route? no problem
+
+```ts
+// providers/AppProvider
+export default class AppProvider {
+    public async boot() {
+        const Configurator = this.app.container.use('SH8GH/Rapid/Configurator')
+
+        Configurator.LoginRenderer(async ({ view }, data) => {
+            return view.render('welcome', data)
+        })
+    }
+}
+
+
+```
+
 ## Todo
 - &check; Upload Package To Npm For Test With Real World Adonis App
 - &check; Login View Route
