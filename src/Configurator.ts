@@ -32,7 +32,7 @@ export default class Configurator implements RapidConfiguratorContract {
         return this.#actionStore.get('login')!
       }
 
-      const login = new LoginController()
+      const login = new LoginController(this.app)
 
       return async (context, data) => login.show(context, data)
     } catch {

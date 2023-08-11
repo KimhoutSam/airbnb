@@ -1,5 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import app from '@ioc:Adonis/Core/Application'
+import { ApplicationContract } from '@ioc:Adonis/Core/Application'
 
 declare module 'adonis-rapid' {
   interface Controllers {
@@ -8,6 +8,8 @@ declare module 'adonis-rapid' {
 }
 
 export default class LoginController {
+  constructor(private app: ApplicationContract) {}
+
   public async show(
     context: HttpContextContract,
     data: {
@@ -17,7 +19,7 @@ export default class LoginController {
       }
     }
   ) {
-    if (app.container.hasBinding('EidelLev/Inertia')) {
+    if (this.app.container.hasBinding('EidelLev/Inertia')) {
       return context.inertia.render('Auth/Login', data)
     }
 

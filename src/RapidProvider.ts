@@ -8,16 +8,6 @@ export default class RapidProvider {
   public register() {
     // Register your own bindings
 
-    this.app.container.singleton('SH8GH/Rapid/Core', () => {
-      const { default: LoginController } = require('./controllers/LoginController')
-      const { default: VerifyMiddleware } = require('./middlewares/VerifyMiddleware')
-
-      return {
-        LoginController,
-        VerifyMiddleware,
-      }
-    })
-
     this.app.container.singleton('SH8GH/Rapid/Configurator', () => {
       const config = this.app.container.resolveBinding('Adonis/Core/Config')
       const rootConfig: RapidConfig = config.get('rapid')
@@ -31,8 +21,8 @@ export default class RapidProvider {
     // All bindings are ready, feel free to use them
 
     this.app.container.withBindings(
-      ['SH8GH/Rapid/Configurator', 'SH8GH/Rapid/Core', 'Adonis/Core/Route'],
-      (Configurator, Core, Route) => {
+      ['SH8GH/Rapid/Configurator', 'Adonis/Core/Application', 'Adonis/Core/Route'],
+      (Configurator, Application, Route) => {
         // Login
         if (Configurator.config.features.includes(Features.enableLoginView)) {
           Route.get('/login', async (context) => {
@@ -47,7 +37,9 @@ export default class RapidProvider {
           })
 
           Route.post('/login', async (context) => {
-            const login = new Core.LoginController()
+            const { default: LoginController } = await import('./controllers/LoginController')
+
+            const login = new LoginController(Application)
 
             return login.store(context)
           })

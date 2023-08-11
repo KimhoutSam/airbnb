@@ -1,7 +1,7 @@
 {
   "name": "adonis-rapid",
   "description": "an redundent free auth/database/user-management configuration for adonisjs",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/SH8GH/adonis-rapid.git"
@@ -115,7 +115,9 @@
   },
   "eslintIgnore": [
     "build",
-    "node_modules"
+    "node_modules",
+    "bin",
+    "tests"
   ],
   "prettier": {
     "trailingComma": "es5",

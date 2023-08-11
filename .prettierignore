@@ -7,3 +7,4 @@ package.json
 *.html
 *.txt
 node_modules
+bin
