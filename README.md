@@ -36,12 +36,12 @@ export default {
 
 ## Todo
 - &check; Upload Package To Npm For Test With Real World Adonis App
-- &check; Login View
-- &cross; Register View
-- &cross; Forgot Password View
-- &cross; Reset Password View
-- &cross; Two Factor Challenge View
-- &cross; Verify Email View
+- &check; Login View Route
+- &cross; Register View Route
+- &cross; Forgot Password View Route
+- &cross; Reset Password View Route
+- &cross; Two Factor Challenge View Route
+- &cross; Verify Email View Route
 - &cross; All Of View Functionality
 - &cross; Add All Of Top With Inertia
 - &cross; Manipulated User Model
