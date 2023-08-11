@@ -14,8 +14,7 @@
       "adonis-rapid/build/src/RapidProvider"
     ],
     "types": "adonis-rapid/build/src/contract",
-    "instructions": "adonis-rapid/build/src/instructions",
-    "instructionsMd": "adonis-rapid/build/src/instructions"
+    "instructions": "adonis-rapid/build/src/instructions"
   },
   "private": false,
   "keywords": [

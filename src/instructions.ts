@@ -6,21 +6,12 @@ export default async function instructions(
   app: ApplicationContract,
   sink: typeof sinkStatic
 ) {
-  const {
-    files,
-    getPrompt,
-    instructions,
-    isInteractive,
-    logger,
-    sinkVersion,
-    sticker,
-    supportsColors,
-    table,
-    tasks,
-    tasksUi,
-    testingRenderer,
-    utils,
-  } = sink
-
-  const packagedotjson = new files.PackageJsonFile(projectRoot)
+  const answer = await sink.getPrompt().multiple('start configuration rapid', [
+    {
+      name: 'as',
+      hint: 'inertia or static or api (for now only static)',
+      disabled: false,
+      message: 'install application as inertia or static or api',
+    },
+  ])
 }
