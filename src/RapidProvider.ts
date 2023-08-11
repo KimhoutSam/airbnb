@@ -23,8 +23,11 @@ export default class RapidProvider {
     this.app.container.withBindings(
       ['SH8GH/Rapid/Configurator', 'Adonis/Core/Application', 'Adonis/Core/Route'],
       (Configurator, Application, Route) => {
-        // Login
-        if (Configurator.config.features.includes(Features.enableLoginView)) {
+        // Login and Static
+        if (
+          Configurator.config.features.includes(Features.enableLoginView) &&
+          Configurator.config.types === 'static'
+        ) {
           Route.get('/login', async (context) => {
             const LoginRenderer = Configurator.getLoginRenderer()
 
@@ -34,7 +37,7 @@ export default class RapidProvider {
                 uid: context.session.get('errors.uid'),
               },
             })
-          })
+          }).as('login')
 
           Route.post('/login', async (context) => {
             const { default: LoginController } = await import('./controllers/LoginController')
@@ -42,7 +45,7 @@ export default class RapidProvider {
             const login = new LoginController(Application)
 
             return login.store(context)
-          })
+          }).as('login.post')
         }
       }
     )
