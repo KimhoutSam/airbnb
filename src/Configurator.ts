@@ -1,6 +1,6 @@
 import { CallbackAction, RapidConfig, RapidConfiguratorContract, RendererKey } from 'adonis-rapid'
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
-import RapidCore from '@ioc:SH8GH/Rapid/Core'
+import LoginController from './controllers/LoginController'
 
 export default class Configurator implements RapidConfiguratorContract {
   #actionStore = new Map<RendererKey, CallbackAction<Record<string, any>>>()
@@ -32,7 +32,7 @@ export default class Configurator implements RapidConfiguratorContract {
         return this.#actionStore.get('login')!
       }
 
-      const login = new RapidCore.LoginController()
+      const login = new LoginController()
 
       return async (context, data) => login.show(context, data)
     } catch {
