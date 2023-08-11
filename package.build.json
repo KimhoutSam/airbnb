@@ -7,24 +7,13 @@
     "url": "git+ssh://git@github.com/SH8GH/adonis-rapid.git"
   },
   "adonisjs": {
-    "commands": [
-      "adonis-rapid/build/src/command/RapidInstall"
-    ],
-    "providers": [
-      "adonis-rapid/build/src/RapidProvider"
-    ],
-    "types": "adonis-rapid/build/src/contract",
-    "instructions": "adonis-rapid/build/src/instructions"
+    "commands": ["./app/Package/build/src/command/RapidInstall"],
+    "providers": ["./app/Package/build/src/RapidProvider"],
+    "types": "./app/Package/build/src/contract",
+    "instructions": "./app/Package/build/src/instructions"
   },
   "private": false,
-  "keywords": [
-    "template",
-    "setup",
-    "adonis",
-    "adonisjs",
-    "jetstream",
-    "presets"
-  ],
+  "keywords": ["template", "setup", "adonis", "adonisjs", "jetstream", "presets"],
   "author": "SamKimhout <samkimhout@gmail.com>",
   "bugs": {
     "url": "https://github.com/SH8GH/adonis-rapid/issues"
@@ -68,10 +57,7 @@
     "license": "MIT",
     "services": [],
     "minNodeVersion": "16.13.1",
-    "probotApps": [
-      "stale",
-      "lock"
-    ]
+    "probotApps": ["stale", "lock"]
   },
   "license": "MIT",
   "scripts": {
@@ -80,8 +66,7 @@
     "test": "node -r @adonisjs/require-ts/build/register bin/test.ts",
     "clean": "del-cli build",
     "compile": "npm run lint && npm run clean && tsc",
-    "build:local": "npm run compile && cp -rf './src/stubs' './build/src' && cp -rf './package.build.json' './build/package.json'",
-    "build": "npm run compile && cp -rf './src/stubs' './build/src'",
+    "build": "npm run compile",
     "prepublishOnly": "npm run build",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
@@ -91,19 +76,10 @@
     "sync-labels": "github-label-sync --labels ./node_modules/@adonisjs/mrm-preset/gh-labels.json SH8GH/adonis-rapid"
   },
   "main": "build/index.js",
-  "files": [
-    "build/src",
-    "build/index.d.ts",
-    "build/index.js"
-  ],
+  "files": ["build/src", "build/index.d.ts", "build/index.js"],
   "eslintConfig": {
-    "extends": [
-      "plugin:adonis/typescriptPackage",
-      "prettier"
-    ],
-    "plugins": [
-      "prettier"
-    ],
+    "extends": ["plugin:adonis/typescriptPackage", "prettier"],
+    "plugins": ["prettier"],
     "rules": {
       "prettier/prettier": [
         "error",
@@ -113,10 +89,7 @@
       ]
     }
   },
-  "eslintIgnore": [
-    "build",
-    "node_modules"
-  ],
+  "eslintIgnore": ["build", "node_modules"],
   "prettier": {
     "trailingComma": "es5",
     "semi": false,

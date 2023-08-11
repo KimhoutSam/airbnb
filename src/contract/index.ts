@@ -7,3 +7,4 @@
 /// <reference types="@adonisjs/auth" />
 /// <reference types="@adonisjs/lucid" />
 /// <reference types="@adonisjs/redis" />
+/// <reference path="./global.ts" />

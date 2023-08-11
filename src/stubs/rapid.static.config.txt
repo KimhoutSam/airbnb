@@ -1,5 +1,5 @@
 import { RapidConfig } from 'adonis-rapid'
-// import { Features } from 'adonis-rapid'
+import { Features } from 'adonis-rapid'
 
 const rapid: RapidConfig = {
   /*
@@ -11,9 +11,10 @@ const rapid: RapidConfig = {
   |
   | Setting the value to `inertia` when you using inertia
   | Setting the value to `static` when you using default template
+  | Setting the value to `api` when you using with third party like next,nuxt,astro, ...etc.
   |
   */
-  types: 'inertia',
+  types: 'static',
 
   /*
   |--------------------------------------------------------------------------
@@ -24,7 +25,9 @@ const rapid: RapidConfig = {
   | List of features is `Features` enum import from `adonis-rapid`
   |
   */
-  features: [],
+  features: [
+    // Features.enableLoginView
+  ],
 }
 
 export default rapid
