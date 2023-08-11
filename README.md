@@ -35,17 +35,17 @@ export default {
 ```
 
 ## Todo
-- [x] Upload Package To Npm For Test With Real World Adonis App
-- [ ] Login View
-- [ ] Register View
-- [ ] Forgot Password View
-- [ ] Reset Password View
-- [ ] Two Factor Challenge View
-- [ ] Verify Email View
-- [ ] All Of View Functionality
-- [ ] Add All Of Top With Inertia
-- [ ] Manipulated User Model
-- [ ] Write Document
+- &check; Upload Package To Npm For Test With Real World Adonis App
+- &check; Login View
+- &cross; Register View
+- &cross; Forgot Password View
+- &cross; Reset Password View
+- &cross; Two Factor Challenge View
+- &cross; Verify Email View
+- &cross; All Of View Functionality
+- &cross; Add All Of Top With Inertia
+- &cross; Manipulated User Model
+- &cross; Write Document
 
 ## Specials Thank to
 
