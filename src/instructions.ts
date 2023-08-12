@@ -29,25 +29,37 @@ export default async function instructions(
   app: ApplicationContract,
   sink: typeof sinkStatic
 ) {
-  const installAs = (await sink
-    .getPrompt()
-    .ask('start configuration rapid as inertia, static, api?', {
-      name: 'as',
-      hint: 'inertia or static or api (for now only static)',
-      default: 'static',
-      async validate(value) {
-        if (value === 'static') {
-          return true
-        }
-        if (value === 'inertia') {
-          return true
-        }
-        if (value === 'api') {
-          return true
-        }
-        return false
-      },
-    })) as 'static' | 'inertia' | 'api'
+  const packageDotJson = new sink.files.PackageJsonFile(projectRoot)
+
+  if (!packageDotJson.getInstalls().list.includes('@adonisjs/lucid')) {
+    sink.logger.await('install database').start()
+    await packageDotJson.install('@adonisjs/lucid', '^18.4.0', false).commitAsync()
+    sink.logger.await('install database').stop()
+  }
+
+  if (!packageDotJson.getInstalls().list.includes('@adonisjs/auth')) {
+    sink.logger.await('install auth').start()
+    await packageDotJson.install('@adonisjs/auth', '^8.2.3', false).commitAsync()
+    sink.logger.await('install auth').stop()
+  }
+
+  const installAs = (await sink.getPrompt().ask('setup config with inertia or static or api?', {
+    name: 'as',
+    hint: 'inertia or static or api (for now only static)',
+    default: 'static',
+    async validate(value) {
+      if (value === 'static') {
+        return true
+      }
+      if (value === 'inertia') {
+        return true
+      }
+      if (value === 'api') {
+        return true
+      }
+      return false
+    },
+  })) as 'static' | 'inertia' | 'api'
 
   if (installAs === 'static') {
     return createStaticInstructions(projectRoot, app, sink, installAs)

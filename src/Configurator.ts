@@ -2,6 +2,16 @@ import { CallbackAction, RapidConfig, RapidConfiguratorContract, RendererKey } f
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
 import LoginController from './controllers/LoginController'
 import RegisterController from './controllers/RegisterController'
+import VerifyEmailController from './controllers/VerifyEmailController'
+import ResetPasswordController from './controllers/ResetPasswordController'
+import TwoFactorAuthController from './controllers/TwoFactorAuthController'
+import ForgotPasswordController from './controllers/ForgotPasswordController'
+import { ForgotPasswordProps } from 'adonis-rapid'
+import { ResetPasswordProps } from 'adonis-rapid'
+import { VerifyEmailProps } from 'adonis-rapid'
+import { TwoFactorChallengeProps } from 'adonis-rapid'
+import { LoginProps } from 'adonis-rapid'
+import { RegisterProps } from 'adonis-rapid'
 
 export default class Configurator implements RapidConfiguratorContract {
   #actionStore = new Map<RendererKey, CallbackAction<Record<string, any>>>()
@@ -21,13 +31,98 @@ export default class Configurator implements RapidConfiguratorContract {
     public app: ApplicationContract
   ) {}
 
-  public LoginRenderer(action: CallbackAction<{ rapid: { password: any; uid: any } }>): void {
+  public ForgotPasswordRenderer(action: CallbackAction<ForgotPasswordProps>): void {
+    if (this.#actionStore.has('forgot-password')) return
+
+    this.#actionStore.set('forgot-password', action)
+  }
+  public ResetPasswordRenderer(action: CallbackAction<ResetPasswordProps>): void {
+    if (this.#actionStore.has('reset-password')) return
+
+    this.#actionStore.set('reset-password', action)
+  }
+
+  public TwoFactorChallengeRenderer(action: CallbackAction<TwoFactorChallengeProps>): void {
+    if (this.#actionStore.has('two-factor-challenge')) return
+
+    this.#actionStore.set('two-factor-challenge', action)
+  }
+
+  public VerifyEmailRenderer(action: CallbackAction<VerifyEmailProps>): void {
+    if (this.#actionStore.has('verify-email')) return
+
+    this.#actionStore.set('verify-email', action)
+  }
+
+  public LoginRenderer(action: CallbackAction<LoginProps>): void {
     if (this.#actionStore.has('login')) return
 
     this.#actionStore.set('login', action)
   }
 
-  public getLoginRenderer(): CallbackAction<{ rapid: { password: any; uid: any } }> {
+  public RegisterRenderer(action: CallbackAction<RegisterProps>): void {
+    if (this.#actionStore.has('register')) return
+
+    this.#actionStore.set('register', action)
+  }
+
+  public getForgotPasswordRenderer(): CallbackAction<ForgotPasswordProps> {
+    try {
+      if (this.#actionStore.has('forgot-password')) {
+        return this.#actionStore.get('forgot-password')!
+      }
+
+      const forgotPassword = new ForgotPasswordController(this.app)
+
+      return async (context, data) => forgotPassword.show(context, data)
+    } catch {
+      return async () => this.#catching()
+    }
+  }
+
+  public getResetPasswordRenderer(): CallbackAction<ResetPasswordProps> {
+    try {
+      if (this.#actionStore.has('reset-password')) {
+        return this.#actionStore.get('reset-password')!
+      }
+
+      const resetPassword = new ResetPasswordController(this.app)
+
+      return async (context, data) => resetPassword.show(context, data)
+    } catch {
+      return async () => this.#catching()
+    }
+  }
+
+  public getTwoFactorChallengeRenderer(): CallbackAction<TwoFactorChallengeProps> {
+    try {
+      if (this.#actionStore.has('two-factor-challenge')) {
+        return this.#actionStore.get('two-factor-challenge')!
+      }
+
+      const twoFactorChallenge = new TwoFactorAuthController(this.app)
+
+      return async (context, data) => twoFactorChallenge.show(context, data)
+    } catch {
+      return async () => this.#catching()
+    }
+  }
+
+  public getVerifyEmailRenderer(): CallbackAction<VerifyEmailProps> {
+    try {
+      if (this.#actionStore.has('verify-email')) {
+        return this.#actionStore.get('verify-email')!
+      }
+
+      const verifyEmail = new VerifyEmailController(this.app)
+
+      return async (context, data) => verifyEmail.show(context, data)
+    } catch {
+      return async () => this.#catching()
+    }
+  }
+
+  public getLoginRenderer(): CallbackAction<LoginProps> {
     try {
       if (this.#actionStore.has('login')) {
         return this.#actionStore.get('login')!
@@ -41,17 +136,7 @@ export default class Configurator implements RapidConfiguratorContract {
     }
   }
 
-  public RegisterRenderer(
-    action: CallbackAction<{ rapid: { password: any; uid: any; confirm: any } }>
-  ): void {
-    if (this.#actionStore.has('register')) return
-
-    this.#actionStore.set('register', action)
-  }
-
-  public getRegisterRenderer(): CallbackAction<{
-    rapid: { password: any; uid: any; confirm: any }
-  }> {
+  public getRegisterRenderer(): CallbackAction<RegisterProps> {
     try {
       if (this.#actionStore.has('register')) {
         return this.#actionStore.get('register')!

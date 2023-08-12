@@ -14,7 +14,7 @@ const rapid: RapidConfig = {
   | Setting the value to `api` when you using with third party like next,nuxt,astro, ...etc.
   |
   */
-  types: 'static',
+  types: 'inertia',
 
   /*
   |--------------------------------------------------------------------------

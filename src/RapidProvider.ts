@@ -43,7 +43,7 @@ export default class RapidProvider {
     Application: ApplicationContract,
     Route: RouterContract
   ) {
-    // Login and Static
+    // Register and Static
     if (
       Configurator.config.features.includes(Features.enableRegisterView) &&
       Configurator.config.types === 'static'
@@ -70,6 +70,66 @@ export default class RapidProvider {
     }
   }
 
+  private bootForgotPasswordStatic(
+    Configurator: RapidConfiguratorContract,
+    Application: ApplicationContract,
+    Route: RouterContract
+  ) {
+    // Forgot Password and Static
+    if (
+      Configurator.config.features.includes(Features.enableForgotPasswordView) &&
+      Configurator.config.types === 'static'
+    ) {
+      Route.get('/forgot-password', async (context) => {
+        const forgotPasswordRenderer = Configurator.getForgotPasswordRenderer()
+
+        return forgotPasswordRenderer(context, {
+          rapid: {},
+        })
+      }).as('forgot-password')
+
+      Route.post('/forgot-password', async (context) => {
+        const { default: ForgotPasswordController } = await import(
+          './controllers/ForgotPasswordController'
+        )
+
+        const register = new ForgotPasswordController(Application)
+
+        return register.update(context)
+      }).as('forgot-password.post')
+    }
+  }
+
+  private bootResetPasswordStatic(
+    Configurator: RapidConfiguratorContract,
+    Application: ApplicationContract,
+    Route: RouterContract
+  ) {
+    // Reset Password and Static
+    if (
+      Configurator.config.features.includes(Features.enableResetPasswordView) &&
+      Configurator.config.types === 'static'
+    ) {
+      Route.get('/reset-password', async (context) => {
+        const resetPasswordRenderer = Configurator.getResetPasswordRenderer()
+
+        return resetPasswordRenderer(context, {
+          rapid: {},
+        })
+      }).as('reset-password')
+
+      Route.post('/reset-password', async (context) => {
+        const { default: ResetPasswordController } = await import(
+          './controllers/ResetPasswordController'
+        )
+
+        const register = new ResetPasswordController(Application)
+
+        return register.update(context)
+      }).as('reset-password.post')
+    }
+  }
+
   public register() {
     // Register your own bindings
 
@@ -88,8 +148,10 @@ export default class RapidProvider {
     this.app.container.withBindings(
       ['SH8GH/Rapid/Configurator', 'Adonis/Core/Route'],
       (Configurator, Route) => {
-        this.bootLoginStatic(Configurator, this.app, Route)
-        this.bootRegisterStatic(Configurator, this.app, Route)
+        this.bootLoginStatic(Configurator as RapidConfiguratorContract, this.app, Route)
+        this.bootRegisterStatic(Configurator as RapidConfiguratorContract, this.app, Route)
+        this.bootForgotPasswordStatic(Configurator as RapidConfiguratorContract, this.app, Route)
+        this.bootResetPasswordStatic(Configurator as RapidConfiguratorContract, this.app, Route)
       }
     )
   }
