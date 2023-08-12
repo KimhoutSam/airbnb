@@ -24,24 +24,29 @@ async function createStaticInstructions(
   template.commit()
 }
 
+async function installPackage(
+  projectRoot: string,
+  sink: typeof sinkStatic,
+  pkg: string,
+  version: string,
+  message: string
+) {
+  const packageDotJson = new sink.files.PackageJsonFile(projectRoot)
+
+  if (!packageDotJson.getInstalls().list.includes(pkg)) {
+    sink.logger.await('install database').start()
+    await packageDotJson.install(pkg, version, false).commitAsync()
+    sink.logger.await('install database').stop()
+  }
+}
+
 export default async function instructions(
   projectRoot: string,
   app: ApplicationContract,
   sink: typeof sinkStatic
 ) {
-  const packageDotJson = new sink.files.PackageJsonFile(projectRoot)
-
-  if (!packageDotJson.getInstalls().list.includes('@adonisjs/lucid')) {
-    sink.logger.await('install database').start()
-    await packageDotJson.install('@adonisjs/lucid', '^18.4.0', false).commitAsync()
-    sink.logger.await('install database').stop()
-  }
-
-  if (!packageDotJson.getInstalls().list.includes('@adonisjs/auth')) {
-    sink.logger.await('install auth').start()
-    await packageDotJson.install('@adonisjs/auth', '^8.2.3', false).commitAsync()
-    sink.logger.await('install auth').stop()
-  }
+  await installPackage(projectRoot, sink, '@adonisjs/lucid', '^18.4.0', 'install database')
+  await installPackage(projectRoot, sink, '@adonisjs/auth', '^8.2.3', 'install auth')
 
   const installAs = (await sink.getPrompt().ask('setup config with inertia or static or api?', {
     name: 'as',
