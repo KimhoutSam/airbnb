@@ -6,7 +6,7 @@ export default class LoginController {
   constructor(private app: ApplicationContract) {}
 
   public async show(context: HttpContextContract, data: LoginProps) {
-    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+    if (this.app.config.get('rapid.type') === 'inertia') {
       return context.inertia.render('Auth/Login', data)
     }
 

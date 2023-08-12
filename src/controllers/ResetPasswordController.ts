@@ -6,7 +6,7 @@ export default class ResetPasswordController {
   constructor(public app: ApplicationContract) {}
 
   public async show(context: HttpContextContract, data: ResetPasswordProps) {
-    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+    if (this.app.config.get('rapid.type') === 'inertia') {
       return context.inertia.render('Auth/ResetPassword', data)
     }
 

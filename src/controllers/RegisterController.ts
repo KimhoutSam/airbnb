@@ -14,7 +14,7 @@ export default class RegisterController {
     { inertia, view }: HttpContextContract,
     data: { rapid: { password: any; uid: any } }
   ) {
-    if (this.#app.container.hasBinding('EidelLev/Inertia')) {
+    if (this.app.config.get('rapid.type') === 'inertia') {
       return inertia.render('Auth/Register', data)
     }
 

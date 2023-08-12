@@ -6,7 +6,7 @@ export default class TwoFactorAuthController {
   constructor(public app: ApplicationContract) {}
 
   public async show(context: HttpContextContract, data: TwoFactorChallengeProps) {
-    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+    if (this.app.config.get('rapid.type') === 'inertia') {
       return context.inertia.render('Auth/TwoFactorChallenge', data)
     }
 

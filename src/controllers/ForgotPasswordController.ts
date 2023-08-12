@@ -6,7 +6,7 @@ export default class ForgotPasswordController {
   constructor(public app: ApplicationContract) {}
 
   public async show(context: HttpContextContract, data: ForgotPasswordProps) {
-    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+    if (this.app.config.get('rapid.type') === 'inertia') {
       return context.inertia.render('Auth/ForgotPassword', data)
     }
 

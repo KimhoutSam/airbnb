@@ -48,7 +48,7 @@ declare module 'adonis-rapid' {
     | 'forgot-password'
 
   interface RapidConfig {
-    types: 'inertia' | 'static' | 'api'
+    type: 'inertia' | 'static' | 'api'
     settings: {}
     features: import('../types').Features[]
   }

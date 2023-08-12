@@ -15,7 +15,7 @@ export default class RapidProvider {
     // Login and Static
     if (
       Configurator.config.features.includes(Features.enableLoginView) &&
-      Configurator.config.types === 'static'
+      Configurator.config.type === 'static'
     ) {
       Route.get('/login', async (context) => {
         const LoginRenderer = Configurator.getLoginRenderer()
@@ -46,7 +46,7 @@ export default class RapidProvider {
     // Register and Static
     if (
       Configurator.config.features.includes(Features.enableRegisterView) &&
-      Configurator.config.types === 'static'
+      Configurator.config.type === 'static'
     ) {
       Route.get('/register', async (context) => {
         const getRegisterRenderer = Configurator.getRegisterRenderer()
@@ -78,7 +78,7 @@ export default class RapidProvider {
     // Forgot Password and Static
     if (
       Configurator.config.features.includes(Features.enableForgotPasswordView) &&
-      Configurator.config.types === 'static'
+      Configurator.config.type === 'static'
     ) {
       Route.get('/forgot-password', async (context) => {
         const forgotPasswordRenderer = Configurator.getForgotPasswordRenderer()
@@ -108,7 +108,7 @@ export default class RapidProvider {
     // Reset Password and Static
     if (
       Configurator.config.features.includes(Features.enableResetPasswordView) &&
-      Configurator.config.types === 'static'
+      Configurator.config.type === 'static'
     ) {
       Route.get('/reset-password', async (context) => {
         const resetPasswordRenderer = Configurator.getResetPasswordRenderer()
@@ -127,6 +127,68 @@ export default class RapidProvider {
 
         return register.update(context)
       }).as('reset-password.post')
+    }
+  }
+
+  private bootVerifyEmailStatic(
+    Configurator: RapidConfiguratorContract,
+    Application: ApplicationContract,
+    Route: RouterContract
+  ) {
+    // Verify Email and Static
+    if (
+      Configurator.config.features.includes(Features.enableVerifyEmailView) &&
+      Configurator.config.type === 'static'
+    ) {
+      Route.get('/verify-email', async (context) => {
+        const verifyEmailRenderer = Configurator.getVerifyEmailRenderer()
+
+        return verifyEmailRenderer(context, {
+          rapid: {
+            email: context.session.get('errors.email'),
+          },
+        })
+      }).as('verify-email')
+
+      Route.post('/verify-email/:email/:id', async (context) => {
+        const { default: VerifyEmailController } = await import(
+          './controllers/VerifyEmailController'
+        )
+
+        const verify = new VerifyEmailController(Application)
+
+        return verify.update(context)
+      }).as('verify-email.post')
+    }
+  }
+
+  private bootTwoFactorChallengeStatic(
+    Configurator: RapidConfiguratorContract,
+    Application: ApplicationContract,
+    Route: RouterContract
+  ) {
+    // Two Factor Challenge and Static
+    if (
+      Configurator.config.features.includes(Features.enableTwoFactorChallengeView) &&
+      Configurator.config.type === 'static'
+    ) {
+      Route.get('/two-factor-challenge', async (context) => {
+        const twoFactorChallengeRenderer = Configurator.getTwoFactorChallengeRenderer()
+
+        return twoFactorChallengeRenderer(context, {
+          rapid: {},
+        })
+      }).as('two-factor-challenge')
+
+      Route.post('/two-factor-challenge', async (context) => {
+        const { default: TwoFactorAuthController } = await import(
+          './controllers/TwoFactorAuthController'
+        )
+
+        const twoFactorAuth = new TwoFactorAuthController(Application)
+
+        return twoFactorAuth.update(context)
+      }).as('two-factor-challenge.post')
     }
   }
 
@@ -152,6 +214,12 @@ export default class RapidProvider {
         this.bootRegisterStatic(Configurator as RapidConfiguratorContract, this.app, Route)
         this.bootForgotPasswordStatic(Configurator as RapidConfiguratorContract, this.app, Route)
         this.bootResetPasswordStatic(Configurator as RapidConfiguratorContract, this.app, Route)
+        this.bootVerifyEmailStatic(Configurator as RapidConfiguratorContract, this.app, Route)
+        this.bootTwoFactorChallengeStatic(
+          Configurator as RapidConfiguratorContract,
+          this.app,
+          Route
+        )
       }
     )
   }

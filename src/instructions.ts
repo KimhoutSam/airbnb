@@ -33,11 +33,16 @@ async function installPackage(
 ) {
   const packageDotJson = new sink.files.PackageJsonFile(projectRoot)
 
+  const logger = sink.logger.await(message)
+
   if (!packageDotJson.getInstalls().list.includes(pkg)) {
-    sink.logger.await(message).start()
+    logger.start()
     await packageDotJson.install(pkg, version, false).commitAsync()
-    sink.logger.await(message).stop()
+    logger.stop()
+    return
   }
+
+  return
 }
 
 export default async function instructions(
