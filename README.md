@@ -50,6 +50,13 @@ export default class AppProvider {
 
 
 ```
+## How To
+
+##### With Disable
+![with disable](https://raw.githubusercontent.com/SH8GH/adonis-rapid/dev/image/disable-something.png)
+
+##### With fully enable
+![with fully enable](https://raw.githubusercontent.com/SH8GH/adonis-rapid/dev/image/fully-enable.png)
 
 ## Todo
 - &check; Upload Package To Npm For Test With Real World Adonis App
