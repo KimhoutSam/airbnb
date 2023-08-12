@@ -10,7 +10,7 @@ export default class ResetPasswordController {
       return context.inertia.render('Auth/ResetPassword', data)
     }
 
-    return context.view.render('Pages/Auth/ResetPassword', data)
+    return context.view.render('pages/auth/reset-password', data)
   }
 
   public async update({}: HttpContextContract) {}

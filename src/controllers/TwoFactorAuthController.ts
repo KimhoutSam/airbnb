@@ -10,7 +10,7 @@ export default class TwoFactorAuthController {
       return context.inertia.render('Auth/TwoFactorChallenge', data)
     }
 
-    return context.view.render('Pages/Auth/TwoFactorChallenge', data)
+    return context.view.render('pages/auth/two-factor-challenge', data)
   }
 
   public async update({}: HttpContextContract) {}

@@ -10,7 +10,7 @@ export default class VerifyEmailController {
       return context.inertia.render('Auth/VerifyEmail', data)
     }
 
-    return context.view.render('Pages/Auth/VerifyEmail', data)
+    return context.view.render('pages/auth/verify-email', data)
   }
 
   public async create({}: HttpContextContract) {}

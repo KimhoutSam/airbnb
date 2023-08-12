@@ -10,7 +10,7 @@ export default class LoginController {
       return context.inertia.render('Auth/Login', data)
     }
 
-    return context.view.render('Pages/Auth/Login', data)
+    return context.view.render('pages/auth/login', data)
   }
 
   public async store({ request, response, auth, session }: HttpContextContract) {

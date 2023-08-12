@@ -10,7 +10,7 @@ export default class ForgotPasswordController {
       return context.inertia.render('Auth/ForgotPassword', data)
     }
 
-    return context.view.render('Pages/Auth/ForgotPassword', data)
+    return context.view.render('pages/auth/forgot-password', data)
   }
 
   public async update({}: HttpContextContract) {}

@@ -18,6 +18,6 @@ export default class RegisterController {
       return inertia.render('Auth/Register', data)
     }
 
-    return view.render('Pages/Auth/Register', data)
+    return view.render('pages/auth/register', data)
   }
 }
