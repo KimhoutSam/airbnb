@@ -2,11 +2,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
 
 export default class RegisterController {
-  #app: ApplicationContract
-
-  constructor(app: ApplicationContract) {
-    this.#app = app
-  }
+  constructor(private app: ApplicationContract) {}
 
   public async store({}: HttpContextContract) {}
 

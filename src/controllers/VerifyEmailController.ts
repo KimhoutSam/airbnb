@@ -3,7 +3,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { VerifyEmailProps } from 'adonis-rapid'
 
 export default class VerifyEmailController {
-  constructor(public app: ApplicationContract) {}
+  constructor(private app: ApplicationContract) {}
 
   public async show(context: HttpContextContract, data: VerifyEmailProps) {
     if (this.app.config.get('rapid.type') === 'inertia') {

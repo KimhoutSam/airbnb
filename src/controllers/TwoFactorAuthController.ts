@@ -3,7 +3,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { TwoFactorChallengeProps } from 'adonis-rapid'
 
 export default class TwoFactorAuthController {
-  constructor(public app: ApplicationContract) {}
+  constructor(private app: ApplicationContract) {}
 
   public async show(context: HttpContextContract, data: TwoFactorChallengeProps) {
     if (this.app.config.get('rapid.type') === 'inertia') {

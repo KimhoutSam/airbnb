@@ -3,7 +3,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { ForgotPasswordProps } from 'adonis-rapid'
 
 export default class ForgotPasswordController {
-  constructor(public app: ApplicationContract) {}
+  constructor(private app: ApplicationContract) {}
 
   public async show(context: HttpContextContract, data: ForgotPasswordProps) {
     if (this.app.config.get('rapid.type') === 'inertia') {

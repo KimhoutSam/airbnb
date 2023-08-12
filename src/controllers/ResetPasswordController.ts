@@ -3,7 +3,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { ResetPasswordProps } from 'adonis-rapid'
 
 export default class ResetPasswordController {
-  constructor(public app: ApplicationContract) {}
+  constructor(private app: ApplicationContract) {}
 
   public async show(context: HttpContextContract, data: ResetPasswordProps) {
     if (this.app.config.get('rapid.type') === 'inertia') {
