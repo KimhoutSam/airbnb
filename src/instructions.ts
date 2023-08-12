@@ -34,9 +34,9 @@ async function installPackage(
   const packageDotJson = new sink.files.PackageJsonFile(projectRoot)
 
   if (!packageDotJson.getInstalls().list.includes(pkg)) {
-    sink.logger.await('install database').start()
+    sink.logger.await(message).start()
     await packageDotJson.install(pkg, version, false).commitAsync()
-    sink.logger.await('install database').stop()
+    sink.logger.await(message).stop()
   }
 }
 
