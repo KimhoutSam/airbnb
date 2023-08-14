@@ -25,6 +25,8 @@ export default class RapidProvider {
             password: context.session.get('errors.password'),
             uid: context.session.get('errors.uid'),
           },
+          hasForgotPasswordLink: Route.has('forgot-password'),
+          hasRegisterLink: Route.has('register'),
         })
       }).as('login')
 

@@ -1,11 +1,34 @@
 declare module 'adonis-rapid' {
   import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+  import { DateTime } from 'luxon'
+  import { column, beforeSave, BaseModel, LucidModel } from '@ioc:Adonis/Lucid/Orm'
+
+  class User extends BaseModel {
+    public id: number
+    public email: string
+    public password: string
+    public name: string
+    public avatar: null | string
+    public avatar_url: null | string
+    public rememberMeToken: string | null
+    public twoFactorEnable: boolean | null
+    public twoFactorRecoveryCode: string | null
+    public twoFactorCode: string | null
+    public createdAt: DateTime
+    public updatedAt: DateTime
+    public static generateAvatar(user: User, name: string): Promise<void>
+    public static hashPassword(user: User): Promise<void>
+  }
+
+  type UserModel = typeof User
 
   type LoginProps = {
     rapid: {
       password: string
       uid: string
     }
+    hasRegisterLink: boolean
+    hasForgotPasswordLink: boolean
   }
 
   type RegisterProps = {
@@ -13,6 +36,7 @@ declare module 'adonis-rapid' {
       password: string
       uid: string
       confirm: string
+      name: string
     }
   }
 
@@ -124,6 +148,9 @@ declare module '@ioc:Adonis/Core/Application' {
   import { RapidConfiguratorContract } from 'adonis-rapid'
 
   interface ContainerBindings {
-    'SH8GH/Rapid/Configurator': Omit<RapidConfiguratorContract, `get${string}Renderer` | 'config'>
+    'SH8GH/Rapid/Configurator': Omit<
+      RapidConfiguratorContract,
+      `getpublic ${string}Renderer` | 'config'
+    >
   }
 }

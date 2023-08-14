@@ -5,6 +5,8 @@
  * file.
  */
 
+import { UserModel } from 'adonis-rapid'
+
 declare module '@ioc:Adonis/Addons/Auth' {
   /*
   |--------------------------------------------------------------------------
@@ -24,16 +26,16 @@ declare module '@ioc:Adonis/Addons/Auth' {
     | User Provider
     |--------------------------------------------------------------------------
     |
-    | The following provider directlly uses Database query builder for fetching
-    | user details from the database for authentication.
+    | The following provider uses Lucid models as a driver for fetching user
+    | details from the database for authentication.
     |
     | You can create multiple providers using the same underlying driver with
-    | different database tables.
+    | different Lucid models.
     |
     */
     user: {
-      implementation: DatabaseProviderContract<DatabaseProviderRow>
-      config: DatabaseProviderConfig
+      implementation: LucidProviderContract<typeof UserModel>
+      config: LucidProviderConfig<typeof UserModel>
     }
   }
 
@@ -65,6 +67,7 @@ declare module '@ioc:Adonis/Addons/Auth' {
     web: {
       implementation: SessionGuardContract<'user', 'web'>
       config: SessionGuardConfig<'user'>
+      client: SessionClientContract<'user'>
     }
     /*
     |--------------------------------------------------------------------------
@@ -79,6 +82,20 @@ declare module '@ioc:Adonis/Addons/Auth' {
       implementation: OATGuardContract<'user', 'api'>
       config: OATGuardConfig<'user'>
       client: OATClientContract<'user'>
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | Basic Auth Guard
+    |--------------------------------------------------------------------------
+    |
+    | The basic guard uses basic auth for maintaining user login state. It uses
+    | the `user` provider for fetching user details.
+    |
+    */
+    basic: {
+      implementation: BasicAuthGuardContract<'user', 'basic'>
+      config: BasicAuthGuardConfig<'user'>
+      client: BasicAuthClientContract<'user'>
     }
   }
 }

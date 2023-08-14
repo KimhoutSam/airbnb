@@ -1,5 +1,5 @@
 import { RapidConfig } from 'adonis-rapid'
-import { Features } from 'adonis-rapid'
+import { Features } from 'adonis-rapid/build/src/types'
 
 const rapid: RapidConfig = {
   /*

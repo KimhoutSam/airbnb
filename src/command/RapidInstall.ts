@@ -35,8 +35,6 @@ export default class RapidInstall extends BaseCommand {
   }
 
   public async run() {
-    if (this.template === 'static') {
-      this.application.configPath('')
-    }
+    this.logger.warning('this command is not yet to implementation, sorry')
   }
 }
