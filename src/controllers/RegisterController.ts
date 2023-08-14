@@ -11,7 +11,7 @@ export default class RegisterController {
     }
   }
 
-  public async store({ request, response, auth }: HttpContextContract) {
+  public async store({ request, response }: HttpContextContract) {
     try {
       const { schema, rules } = this.app.container.use('Adonis/Core/Validator')
       const { default: UserAppModel } = require(this.app.makePath('app', 'Models', 'User.ts')) as {
@@ -39,7 +39,7 @@ export default class RegisterController {
         avatar_url: null,
       })
 
-      await UserAppModel.generateAvatar(user, data.name)
+      await user.save()
 
       response.redirect().toRoute('login')
     } catch (error) {

@@ -58,6 +58,7 @@ export default class RapidProvider {
             password: context.session.get('errors.password'),
             confirm: context.session.get('errors.confirm'),
             uid: context.session.get('errors.uid'),
+            name: context.session.get('errors.name'),
           },
         })
       }).as('register')

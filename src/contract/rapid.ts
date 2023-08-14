@@ -16,7 +16,7 @@ declare module 'adonis-rapid' {
     public twoFactorCode: string | null
     public createdAt: DateTime
     public updatedAt: DateTime
-    public static generateAvatar(user: User, name: string): Promise<void>
+    public static generateAvatar(user: User): Promise<void>
     public static hashPassword(user: User): Promise<void>
   }
 
