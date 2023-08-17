@@ -1,0 +1,38 @@
+@template()
+@slot('head')
+<title>Login To SaaS</title>
+@end
+
+<body class="h-screen flex items-center justify-center flex-col bg-light-background">
+    <header>
+        <a href="{{ route('home') }}">
+            <img src="/brand-assets/logo/png/adonis-transparent.png" alt="adonis-js" class="w-[200px]">
+        </a>
+    </header>
+    <main class="shadow-md">
+        <form class="px-6 py-3 bg-slate-100" action="{{ route('login.post') }}" method="post">
+            <div class="my-2">
+                <label for="uid">UID: </label>
+                <input class="w-full rounded" type="text" inputmode="email" name="uid" id="uid" placeholder="UID" />
+                @if(flashMessages.has('errors.uid'))
+                <p class="text-red-700 font-extrabold">{{ flashMessages.get('errors.uid') }}</p>
+                @end
+            </div>
+            <div class="my-2">
+                <label for="password">Password: </label>
+                <input class="w-full rounded" type="password" name="password" id="password" placeholder="Password" />
+                @if(flashMessages.has('errors.password'))
+                <p class="text-red-700 font-extrabold">{{ flashMessages.get('errors.password') }}</p>
+                @end
+            </div>
+            <div class="my-3 flex items-center justify-between">
+                <a class="mx-2 text-light-secondary hover:text-light-secondary/80 hover:underline"
+                    href="{{ route('register') }}">
+                    Unregistered?
+                </a>
+                <button class="bg-light-secondary px-2 py-1 rounded text-dark-text" type="submit">Submit</button>
+            </div>
+        </form>
+    </main>
+</body>
+@end

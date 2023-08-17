@@ -78,7 +78,7 @@
     "test": "node -r @adonisjs/require-ts/build/register bin/test.ts",
     "clean": "del-cli build",
     "compile": "npm run lint && npm run clean && tsc",
-    "build:local": "npm run compile",
+    "build:local": "npm run compile && cp -rf './src/stubs' './build/src'",
     "build": "npm run compile",
     "prepublishOnly": "npm run build",
     "lint": "eslint . --ext=.ts",

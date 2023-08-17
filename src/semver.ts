@@ -1,1 +1,3 @@
-export const version = 'v0.1.6'
+import { packageDotJson } from './utils'
+
+export const version = packageDotJson().version

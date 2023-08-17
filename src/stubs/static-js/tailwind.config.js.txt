@@ -1,0 +1,32 @@
+// const plugins = require('tailwindcss/plugin')
+const defaultTheme = require('tailwindcss/defaultTheme')
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ['./resources/**/*.{edge,vue,js.jsx.ts.tsx,svelte}'],
+  theme: {
+    extend: {
+      colors: {
+        'light-text': '#000000',
+        'light-background': '#e7e5fa',
+        'light-primary': '#5A45FF',
+        'light-secondary': '#46444c',
+        'light-accent': '#ba21a8',
+        'dark-text': '#e7e5fa',
+        'dark-background': '#000000',
+        'dark-primary': '#5A45FF',
+        'dark-secondary': '#020203',
+        'dark-accent': '#ea8adf',
+      },
+      fontFamily: () => ({
+        poppins: ["'Poppins'", ...defaultTheme.fontFamily.serif],
+      }),
+    },
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/container-queries'),
+  ],
+}

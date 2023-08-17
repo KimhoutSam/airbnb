@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdonisJS - A fully featured web framework for Node.js</title>
+  @entryPointStyles('app')
+  @entryPointScripts('app')
+</head>
+
+<body
+  class="bg-light-background font-poppins before:absolute before:top-0 before:w-full before:bg-light-primary before:content-[''] before:h-2 py-3 flex items-center justify-center flex-col h-screen">
+  @if(auth.isLoggedIn)
+  <header class="flex items-center justify-end w-full">
+    <div>
+      <a href="{{ route('dashboard') }}">Dashboard</a>
+    </div>
+  </header>
+  @else
+  <header class="flex items-center justify-end w-full">
+    <div>
+      <a class="mx-2 text-light-primary hover:text-light-primary/80 hover:underline"
+        href="{{ route('login') }}">Login</a>
+      @if(canRegister)
+      <a class="mx-2 text-light-primary hover:text-light-primary/80 hover:underline"
+        href="{{ route('register') }}">Register</a>
+      @end
+    </div>
+  </header>
+  @end
+  <main class="flex-1 flex items-center justify-center">
+    <div>
+      <h1 class="font-bold text-5xl my-2">It Works!</h1>
+      <p class="my-4 text-sm">
+        Congratulations, you have just created your first AdonisJS app.
+      </p>
+
+      <ul class="[&_>_li]:before:content-['—']">
+        <li>
+          The route for this page is defined inside <code class="bg-gray-200 p-1 rounded">start/routes.ts</code> file
+        </li>
+
+        <li>
+          You can update this page by editing <code class="bg-gray-200 p-1 rounded">resources/views/welcome.edge</code>
+          file
+        </li>
+
+        <li>
+          <span>If you run into problems, you can reach us on</span>
+          <a class="mx-2 text-light-primary hover:text-light-primary/80 hover:underline"
+            href="https://discord.gg/vDcEjq6?">
+            Discord
+          </a>
+          <span>or the</span>
+          <a class="mx-2 text-light-primary hover:text-light-primary/80 hover:underline"
+            href="https://forum.adonisjs.com/">
+            Forum
+          </a>.
+        </li>
+      </ul>
+    </div>
+  </main>
+</body>
+
+</html>
