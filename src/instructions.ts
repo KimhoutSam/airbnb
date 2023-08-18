@@ -1,5 +1,6 @@
+import { Syntax } from 'adonis-rapid/enum'
 import type { InstructionsParameter } from 'adonis-rapid/instructions'
-import { copy } from './utils'
+import fs from 'fs-extra'
 import path from 'path'
 
 export default async function instructions(...args: InstructionsParameter) {
@@ -83,14 +84,62 @@ export default async function instructions(...args: InstructionsParameter) {
     sink.logger.success('installed "totp-generator" testing two factor auth, wait for setup')
   }
 
-  copy({
-    source: 'stubs/rapid.ts.txt',
-    destination: app.configPath(),
-    extension: {
-      exception: true,
-      from: '.txt',
-      to: '',
+  const prompt = sink.getPrompt()
+
+  const syntax = await prompt.choice('what client syntax you use?', ['javascript', 'typeScript'], {
+    default: 'javascript',
+    hint: 'javascript',
+    result(value) {
+      if (value === 'javascript' || value === 'typeScript') {
+        return value
+      }
+      return 'javascript'
     },
-    root: __dirname,
   })
+
+  const types = await prompt.choice(
+    'what client types you use?',
+    [
+      {
+        name: 'static',
+      },
+      {
+        name: 'inertia-vue',
+      },
+      {
+        name: 'inertia-react',
+      },
+      {
+        name: 'inertia-svelte',
+      },
+      {
+        name: 'api',
+      },
+    ],
+    {
+      result(value) {
+        if (
+          value === 'static' ||
+          value === 'inertia-vue' ||
+          value === 'inertia-react' ||
+          value === 'inertia-svelte' ||
+          value === 'api'
+        ) {
+          return value
+        }
+        return 'static'
+      },
+    }
+  )
+
+  if (fs.existsSync(app.makePath('_resources'))) {
+    sink.logger.warning('look like your app have "resources" folder')
+    await fs.move(app.makePath('resources'), app.makePath('_resources'))
+    sink.logger.success(
+      `{${sink.logger.colors.white(app.makePath('resources'))} => ${sink.logger.colors.white(
+        app.makePath('_resources')
+      )}}`,
+      'moved'
+    )
+  }
 }
