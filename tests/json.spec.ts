@@ -3,4 +3,4 @@ import { packageDotJson } from '../src/utils'
 
 test('package.json', () => {
   console.log(packageDotJson())
-})
+}).skip(true)

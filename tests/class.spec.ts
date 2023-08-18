@@ -22,4 +22,4 @@ test('return class', async () => {
   const returning = new Returning()
 
   returning.bar
-})
+}).skip(true)

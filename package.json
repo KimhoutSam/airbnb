@@ -11,14 +11,7 @@
     "instructions": "adonis-rapid/build/src/instructions"
   },
   "private": false,
-  "keywords": [
-    "template",
-    "setup",
-    "adonis",
-    "adonisjs",
-    "jetstream",
-    "presets"
-  ],
+  "keywords": ["template", "setup", "adonis", "adonisjs", "jetstream", "presets"],
   "author": "SamKimhout <samkimhout@gmail.com>",
   "bugs": {
     "url": "https://github.com/SH8GH/adonis-rapid/issues"
@@ -40,6 +33,7 @@
     "@japa/run-failed-tests": "^1.1.1",
     "@japa/runner": "^2.5.1",
     "@japa/spec-reporter": "^1.3.3",
+    "@poppinss/utils": "^5.0.0",
     "@types/authenticator": "^1.1.1",
     "@types/node": "^20.4.9",
     "@types/qrcode": "^1.5.1",
@@ -66,10 +60,7 @@
     "license": "MIT",
     "services": [],
     "minNodeVersion": "16.13.1",
-    "probotApps": [
-      "stale",
-      "lock"
-    ]
+    "probotApps": ["stale", "lock"]
   },
   "license": "MIT",
   "scripts": {
@@ -78,8 +69,7 @@
     "test": "node -r @adonisjs/require-ts/build/register bin/test.ts",
     "clean": "del-cli build",
     "compile": "npm run lint && npm run clean && tsc",
-    "build:local": "npm run compile && cp -rf './src/stubs' './build/src'",
-    "build": "npm run compile",
+    "build": "npm run compile && cp -rf './src/stubs' './build/src'",
     "prepublishOnly": "npm run build",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
@@ -89,19 +79,10 @@
     "sync-labels": "github-label-sync --labels ./node_modules/@adonisjs/mrm-preset/gh-labels.json SH8GH/adonis-rapid"
   },
   "main": "build/index.js",
-  "files": [
-    "build/src",
-    "build/index.d.ts",
-    "build/index.js"
-  ],
+  "files": ["build/src", "build/index.d.ts", "build/index.js"],
   "eslintConfig": {
-    "extends": [
-      "plugin:adonis/typescriptPackage",
-      "prettier"
-    ],
-    "plugins": [
-      "prettier"
-    ],
+    "extends": ["plugin:adonis/typescriptPackage", "prettier"],
+    "plugins": ["prettier"],
     "rules": {
       "prettier/prettier": [
         "error",
@@ -111,12 +92,7 @@
       ]
     }
   },
-  "eslintIgnore": [
-    "build",
-    "node_modules",
-    "bin",
-    "tests"
-  ],
+  "eslintIgnore": ["build", "node_modules", "bin", "tests"],
   "prettier": {
     "trailingComma": "es5",
     "semi": false,

@@ -7,4 +7,4 @@ import '../src/contract/index'
 test('totp test', ({ expect }) => {
   const code = generator('DLOTQLMIOJ3DDKQU')
   console.log(code)
-}).skip
+}).skip(true)

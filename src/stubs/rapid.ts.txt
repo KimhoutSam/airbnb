@@ -1,0 +1,56 @@
+import { Algorithem, RapidType, Syntax } from 'adonis-rapid/enum'
+import { RapidConfiguration } from 'adonis-rapid/instructions'
+
+/*
+|--------------------------------------------------------------------------
+| Rapid Configuration
+|--------------------------------------------------------------------------
+|
+| List Going To Preset In `adonis-rapid` Provider
+|
+*/
+const config: RapidConfiguration = {
+  /*
+  |--------------------------------------------------------------------------
+  | Authentication Copying
+  |--------------------------------------------------------------------------
+  |
+  | Specified Type What Your App Going To Run
+  |
+  */
+  type: [-types-],
+
+  /*
+  |--------------------------------------------------------------------------
+  | Install Syntax Set
+  |--------------------------------------------------------------------------
+  |
+  | Here You Can Specified Syntax Type When Run `node ace rapid:install`
+  |
+  */
+  syntax: [-syntax-],
+
+  /*
+  |--------------------------------------------------------------------------
+  | Authentication Settings
+  |--------------------------------------------------------------------------
+  |
+  | a set of config for authentication
+  |
+  */
+  settings: {
+    sha: Algorithem.SHA1,
+  },
+
+  /*
+  |--------------------------------------------------------------------------
+  | Features Mapping
+  |--------------------------------------------------------------------------
+  |
+  | List Features That App Going Run
+  |
+  */
+  features: [],
+}
+
+export default config

@@ -9,8 +9,12 @@ declare module 'adonis-rapid/enum' {
     inertiaVue = 'inertia-vue',
     inertiaSvelte = 'inertia-svelte',
     inertiaReact = 'inertia-react',
-    radonis = 'radonis',
     api = 'api',
+  }
+
+  enum Syntax {
+    JavaScript = 'javascript',
+    TypeScript = 'typescript',
   }
 
   enum Algorithem {
