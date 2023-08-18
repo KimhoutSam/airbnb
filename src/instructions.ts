@@ -90,6 +90,6 @@ export default async function instructions(...args: InstructionsParameter) {
       from: '.txt',
       to: '',
     },
-    root:
+    root: __dirname,
   })
 }

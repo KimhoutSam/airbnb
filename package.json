@@ -1,7 +1,7 @@
 {
   "name": "adonis-rapid",
   "description": "an redundent free auth/database/user-management configuration for adonisjs",
-  "version": "0.1.5-preview-8",
+  "version": "0.1.6-cjs-preview-8",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/SH8GH/adonis-rapid.git"
@@ -11,7 +11,14 @@
     "instructions": "adonis-rapid/build/src/instructions"
   },
   "private": false,
-  "keywords": ["template", "setup", "adonis", "adonisjs", "jetstream", "presets"],
+  "keywords": [
+    "template",
+    "setup",
+    "adonis",
+    "adonisjs",
+    "jetstream",
+    "presets"
+  ],
   "author": "SamKimhout <samkimhout@gmail.com>",
   "bugs": {
     "url": "https://github.com/SH8GH/adonis-rapid/issues"
@@ -60,7 +67,10 @@
     "license": "MIT",
     "services": [],
     "minNodeVersion": "16.13.1",
-    "probotApps": ["stale", "lock"]
+    "probotApps": [
+      "stale",
+      "lock"
+    ]
   },
   "license": "MIT",
   "scripts": {
@@ -79,10 +89,19 @@
     "sync-labels": "github-label-sync --labels ./node_modules/@adonisjs/mrm-preset/gh-labels.json SH8GH/adonis-rapid"
   },
   "main": "build/index.js",
-  "files": ["build/src", "build/index.d.ts", "build/index.js"],
+  "files": [
+    "build/src",
+    "build/index.d.ts",
+    "build/index.js"
+  ],
   "eslintConfig": {
-    "extends": ["plugin:adonis/typescriptPackage", "prettier"],
-    "plugins": ["prettier"],
+    "extends": [
+      "plugin:adonis/typescriptPackage",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
     "rules": {
       "prettier/prettier": [
         "error",
@@ -92,7 +111,12 @@
       ]
     }
   },
-  "eslintIgnore": ["build", "node_modules", "bin", "tests"],
+  "eslintIgnore": [
+    "build",
+    "node_modules",
+    "bin",
+    "tests"
+  ],
   "prettier": {
     "trailingComma": "es5",
     "semi": false,
