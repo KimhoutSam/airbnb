@@ -1,14 +1,15 @@
 import type { InstructionsParameter } from 'adonis-rapid/instructions'
-import { version } from './semver'
 import { copy } from './utils'
+import path from 'path'
 
 export default async function instructions(...args: InstructionsParameter) {
   const [, app, sink] = args
 
   const pkg = new sink.files.PackageJsonFile(app.makePath())
+  const $pkg = new sink.files.PackageJsonFile(path.join(__dirname, '..'))
 
   // check if that was preview
-  if (version.includes('preview')) {
+  if ($pkg.get().version.includes('preview')) {
     const release = sink.logger.colors.bold(sink.logger.colors.yellow('^0.2.0-cjs'))
     const warning = sink.logger.colors.bold(sink.logger.colors.yellow('^0.1.5-preview-5'))
 

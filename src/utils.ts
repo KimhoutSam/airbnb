@@ -1,6 +1,7 @@
 import fs from 'fs-extra'
 import * as utils from '@poppinss/utils/build/helpers'
 import * as sink from '@adonisjs/sink'
+import path from 'path'
 
 interface CopyOptions {
   root: string
@@ -24,10 +25,6 @@ interface CopyOptions {
       destination: string
     }
   ): void
-}
-
-export const packageDotJson = () => {
-  return fs.readJSONSync(`${__dirname}/../package.json`, { encoding: 'utf-8' })
 }
 
 export const copy = async ({
