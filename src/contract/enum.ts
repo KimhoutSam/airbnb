@@ -4,19 +4,6 @@ declare module 'adonis-rapid/enum' {
     enableRegisterView = 'enable-register-view',
   }
 
-  enum RapidType {
-    static = 'static',
-    inertiaVue = 'inertia-vue',
-    inertiaSvelte = 'inertia-svelte',
-    inertiaReact = 'inertia-react',
-    api = 'api',
-  }
-
-  enum Syntax {
-    JavaScript = 'javascript',
-    TypeScript = 'typescript',
-  }
-
   enum Algorithem {
     SHA1 = 'SHA1',
     SHA224 = 'SHA224',

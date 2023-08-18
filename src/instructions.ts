@@ -1,7 +1,7 @@
-import { Syntax } from 'adonis-rapid/enum'
 import type { InstructionsParameter } from 'adonis-rapid/instructions'
 import fs from 'fs-extra'
 import path from 'path'
+import { copy } from './utils'
 
 export default async function instructions(...args: InstructionsParameter) {
   const [, app, sink] = args
@@ -86,60 +86,47 @@ export default async function instructions(...args: InstructionsParameter) {
 
   const prompt = sink.getPrompt()
 
-  const syntax = await prompt.choice('what client syntax you use?', ['javascript', 'typeScript'], {
-    default: 'javascript',
-    hint: 'javascript',
-    result(value) {
-      if (value === 'javascript' || value === 'typeScript') {
-        return value
-      }
-      return 'javascript'
-    },
-  })
+  const bundler = await prompt.choice('what your prefer bundler?', ['webpack', 'vite'])
 
-  const types = await prompt.choice(
-    'what client types you use?',
-    [
-      {
-        name: 'static',
-      },
-      {
-        name: 'inertia-vue',
-      },
-      {
-        name: 'inertia-react',
-      },
-      {
-        name: 'inertia-svelte',
-      },
-      {
-        name: 'api',
-      },
-    ],
-    {
-      result(value) {
-        if (
-          value === 'static' ||
-          value === 'inertia-vue' ||
-          value === 'inertia-react' ||
-          value === 'inertia-svelte' ||
-          value === 'api'
-        ) {
-          return value
-        }
-        return 'static'
-      },
-    }
-  )
+  const stack = await prompt.choice('what client types you use?', ['static', 'inertia', 'api'])
 
-  if (fs.existsSync(app.makePath('_resources'))) {
+  const resourcesPath = app.makePath('resources')
+  const resourcesPathNext = app.makePath('_resources')
+
+  if (fs.existsSync(resourcesPath)) {
     sink.logger.warning('look like your app have "resources" folder')
-    await fs.move(app.makePath('resources'), app.makePath('_resources'))
+    await fs.move(resourcesPath, resourcesPathNext)
     sink.logger.success(
-      `{${sink.logger.colors.white(app.makePath('resources'))} => ${sink.logger.colors.white(
-        app.makePath('_resources')
+      `{${sink.logger.colors.white(resourcesPath)} => ${sink.logger.colors.white(
+        resourcesPathNext
       )}}`,
       'moved'
     )
+  }
+
+  await copy(`${__dirname}/stubs/rapid.ts.txt`, app.configPath('rapid.ts'), {
+    stack: `'${stack}'`,
+  })
+
+  if (bundler === 'vite') {
+    sink.logger.info('sorry for inconvenience we only setup webpack for now')
+  }
+
+  if (bundler === 'webpack') {
+    const webpackPath = app.makePath('webpack.config.js')
+    const webpackPathNext = app.makePath('_webpack.config.js')
+
+    if (fs.existsSync(webpackPath)) {
+      sink.logger.warning('look like your app have webpack config file')
+      await fs.move(webpackPath, webpackPathNext)
+      sink.logger.success(
+        `{${sink.logger.colors.white(webpackPath)} => ${sink.logger.colors.white(
+          webpackPathNext
+        )}}`,
+        'moved'
+      )
+    }
+
+    await copy(`${__dirname}/stubs/webpack.config.js.txt`, webpackPath, {})
   }
 }

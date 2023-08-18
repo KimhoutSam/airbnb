@@ -1,5 +1,5 @@
 declare module 'adonis-rapid/instructions' {
-  import { Algorithem, Features, RapidType, Syntax } from 'adonis-rapid/enum'
+  import { Algorithem, Features } from 'adonis-rapid/enum'
   import { ApplicationContract } from '@ioc:Adonis/Core/Application'
   import * as sink from '@adonisjs/sink'
 
@@ -8,8 +8,7 @@ declare module 'adonis-rapid/instructions' {
   type InstructionsParameter = [projectRoot: string, app: ApplicationContract, sink: SinkStatic]
 
   type RapidConfiguration = {
-    type: RapidType
-    syntax: Syntax
+    stack: 'edge' | 'inertia' | 'api'
     settings: {
       sha: Algorithem
     }

@@ -1,4 +1,4 @@
-import { Algorithem, RapidType, Syntax } from 'adonis-rapid/enum'
+import { Algorithem, Features } from 'adonis-rapid/enum'
 import { RapidConfiguration } from 'adonis-rapid/instructions'
 
 /*
@@ -12,23 +12,13 @@ import { RapidConfiguration } from 'adonis-rapid/instructions'
 const config: RapidConfiguration = {
   /*
   |--------------------------------------------------------------------------
-  | Authentication Copying
+  | Authentication App Stack
   |--------------------------------------------------------------------------
   |
-  | Specified Type What Your App Going To Run
+  | Specified Stack What Your App Going To Run
   |
   */
-  type: [-types-],
-
-  /*
-  |--------------------------------------------------------------------------
-  | Install Syntax Set
-  |--------------------------------------------------------------------------
-  |
-  | Here You Can Specified Syntax Type When Run `node ace rapid:install`
-  |
-  */
-  syntax: [-syntax-],
+  stack: {{ stack }},
 
   /*
   |--------------------------------------------------------------------------
