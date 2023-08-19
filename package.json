@@ -139,6 +139,7 @@
   "dependencies": {
     "@adonisjs/sink": "^5.4.3",
     "authenticator": "^1.1.5",
+    "generate-avatar": "^1.4.10",
     "qrcode": "^1.5.3",
     "totp-generator": "^0.0.14"
   }

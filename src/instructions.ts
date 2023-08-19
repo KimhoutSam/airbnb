@@ -6,6 +6,13 @@ import { copy } from './utils'
 export default async function instructions(...args: InstructionsParameter) {
   const [, app, sink] = args
 
+  sink.logger.info('|-----------------------------------------------------|')
+  sink.logger.info('|                                                     |')
+  sink.logger.info('| For Best DX on Mailer Testing I Recommend "Mailpit" |')
+  sink.logger.info('|          https://github.com/axllent/mailpit         |')
+  sink.logger.info('|                                                     |')
+  sink.logger.info('|-----------------------------------------------------|')
+
   const pkg = new sink.files.PackageJsonFile(app.makePath())
   const $pkg = new sink.files.PackageJsonFile(path.join(__dirname, '..'))
 
@@ -84,12 +91,23 @@ export default async function instructions(...args: InstructionsParameter) {
     sink.logger.success('installed "totp-generator" testing two factor auth, wait for setup')
   }
 
+  if (!('generate-avatar' in pkg.get().devDependencies)) {
+    pkg.beforeInstall(() => {
+      sink.logger.log('install "generate-avatar" testing two factor auth')
+    })
+
+    pkg.install('generate-avatar', '^1.1.5', false)
+
+    sink.logger.success('installed "generate-avatar" for generating avatar')
+  }
+
   const prompt = sink.getPrompt()
 
   const bundler = await prompt.choice('what your prefer bundler?', ['webpack', 'vite'])
 
   const stack = await prompt.choice('what client types you use?', ['static', 'inertia', 'api'])
 
+  // resources folder
   const resourcesPath = app.makePath('resources')
   const resourcesPathNext = app.makePath('_resources')
 
@@ -103,13 +121,17 @@ export default async function instructions(...args: InstructionsParameter) {
       'moved'
     )
   }
+  // resources folder
 
+  // rapid config file
   await copy(`${__dirname}/stubs/rapid.ts.txt`, app.configPath('rapid.ts'), {
     stack: `'${stack}'`,
   })
+  // rapid config file
 
+  // bundler
   if (bundler === 'vite') {
-    sink.logger.info('sorry for inconvenience we only setup webpack for now')
+    sink.logger.info("sorry for inconvenience i'm only setup webpack for now")
   }
 
   if (bundler === 'webpack') {
@@ -129,4 +151,5 @@ export default async function instructions(...args: InstructionsParameter) {
 
     await copy(`${__dirname}/stubs/webpack.config.js.txt`, webpackPath, {})
   }
+  // bundler
 }

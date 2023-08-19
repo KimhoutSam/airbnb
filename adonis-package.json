@@ -1,7 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/adonisjs/sink/develop/instructions.schema.json",
   "adonisjs": {
-    "providers": ["adonis-rapid/build/src/RapidProvider"],
     "types": "adonis-rapid/build/src/contract",
     "instructions": "adonis-rapid/build/src/instructions"
   }
