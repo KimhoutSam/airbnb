@@ -64,6 +64,9 @@ export const install = async (packageRoot: string, ...packages: Packaging[]) => 
   const npm = new sink.files.PackageJsonFile(packageRoot)
 
   packages.forEach(($package) => {
+    sink.logger.info(
+      `install "${$package.name}@${$package.version}" as ${$package.dev ? 'deps' : 'devDeps'}`
+    )
     npm.install($package.name, $package.version, $package.dev).commit()
   })
 }
