@@ -8,6 +8,16 @@ declare module '@ioc:Adonis/Core/Application' {
   }
 }
 
+declare module '@ioc:SH8GH/Rapid/Core' {
+  import { User } from 'adonis-rapid/models'
+
+  const root: {
+    UserModel: typeof User
+  }
+
+  export default root
+}
+
 declare module 'adonis-rapid/models' {
   import { DateTime } from 'luxon'
   import { BaseModel } from '@ioc:Adonis/Lucid/Orm'
