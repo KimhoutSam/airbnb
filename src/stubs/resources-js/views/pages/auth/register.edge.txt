@@ -10,7 +10,13 @@
         </a>
     </header>
     <main class="shadow-md">
-        <form class="px-6 py-3 bg-slate-100" action="{{ route('register.post') }}" method="post">
+        <form class="px-6 py-3 bg-slate-100 w-96" action="{{ route('register.post') }}" method="post">
+            <div class="my-2">
+                <h1 class="text-4xl my-4">
+                    <span>Register To</span>
+                    <span class="font-bold">{{ env('APP_NAME', 'SaaS').toUpperCase() }}</span>
+                </h1>
+            </div>
             <div class="my-2">
                 <label for="uid">UID: </label>
                 <input class="w-full rounded" type="text" inputmode="email" name="uid" id="uid" placeholder="UID" />
@@ -43,7 +49,7 @@
             <div class="my-3 flex items-center justify-between">
                 <a class="mx-2 text-light-secondary hover:text-light-secondary/80 hover:underline"
                     href="{{ route('login') }}">
-                    Registered?
+                    Already?
                 </a>
                 <button class="bg-light-secondary px-2 py-1 rounded text-dark-text" type="submit">Submit</button>
             </div>

@@ -14,7 +14,8 @@
   @if(auth.isLoggedIn)
   <header class="flex items-center justify-end w-full">
     <div>
-      <a href="{{ route('dashboard') }}">Dashboard</a>
+      <a class="mx-2 text-light-primary hover:text-light-primary/80 hover:underline"
+        href="{{ route('dashboard') }}">Dashboard</a>
     </div>
   </header>
   @else
@@ -36,13 +37,13 @@
         Congratulations, you have just created your first AdonisJS app.
       </p>
 
-      <ul class="[&_>_li]:before:content-['—']">
+      <ul class="[&_>_li]:before:content-['—'] [&_>_li]:my-1">
         <li>
-          The route for this page is defined inside <code class="bg-gray-200 p-1 rounded">start/routes.ts</code> file
+          The route for this page is defined inside <code class="bg-gray-300 p-1 rounded">start/routes.ts</code> file
         </li>
 
         <li>
-          You can update this page by editing <code class="bg-gray-200 p-1 rounded">resources/views/welcome.edge</code>
+          You can update this page by editing <code class="bg-gray-300 p-1 rounded">resources/views/welcome.edge</code>
           file
         </li>
 

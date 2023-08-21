@@ -1,0 +1,36 @@
+@template()
+@slot('head')
+<title>Login To SaaS</title>
+@end
+
+<body class="h-screen flex items-center justify-center flex-col bg-light-background">
+    <header>
+        <a href="{{ route('home') }}">
+            <img src="/brand-assets/logo/png/adonis-transparent.png" alt="adonis-js" class="w-[200px]">
+        </a>
+    </header>
+    <main class="shadow-md">
+        <form class="px-6 py-3 bg-slate-100 w-96" action="{{ route('verify-email.post') }}" method="post">
+            <div class="my-2">
+                <h1 class="font-bold text-4xl my-4">Email Verification</h1>
+                <p class="my-4">
+                    Before continuing, could you verify your email address by clicking on
+                    the link we just emailed to you? If you didn't receive the email, we
+                    will gladly send you another.
+                </p>
+            </div>
+            <div class="my-2">
+                <label for="email">Email: </label>
+                <input class="w-full rounded" type="text" inputmode="email" name="email" id="email"
+                    placeholder="Email" />
+                @if(flashMessages.has('errors.email'))
+                <p class="text-red-700 font-extrabold">{{ flashMessages.get('errors.email') }}</p>
+                @end
+            </div>
+            <div class="my-3 flex items-center justify-between">
+                <button class="bg-light-secondary px-2 py-1 rounded text-dark-text" type="submit">Submit</button>
+            </div>
+        </form>
+    </main>
+</body>
+@end

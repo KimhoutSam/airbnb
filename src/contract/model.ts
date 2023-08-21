@@ -1,4 +1,14 @@
-declare module '@ioc:SH8GH/Rapid/UserModel' {
+declare module '@ioc:Adonis/Core/Application' {
+  import { User } from 'adonis-rapid/models'
+
+  interface ContainerBindings {
+    'SH8GH/Rapid/Core': {
+      UserModel: typeof User
+    }
+  }
+}
+
+declare module 'adonis-rapid/models' {
   import { DateTime } from 'luxon'
   import { BaseModel } from '@ioc:Adonis/Lucid/Orm'
 
@@ -19,18 +29,4 @@ declare module '@ioc:SH8GH/Rapid/UserModel' {
     public updatedAt: DateTime
     public static defaultFromRapid(user: User): Promise<void>
   }
-}
-
-declare module '@ioc:Adonis/Core/Application' {
-  import User from '@ioc:SH8GH/Rapid/UserModel'
-
-  interface ContainerBindings {
-    'SH8GH/Rapid/UserModel': typeof User
-  }
-}
-
-declare module 'adonis-rapid/models' {
-  import { User } from '@ioc:SH8GH/Rapid/UserModel'
-
-  type BaseExtendsModel = typeof User
 }

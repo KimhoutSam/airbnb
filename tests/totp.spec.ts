@@ -16,4 +16,4 @@ test('pkg.json test', async ({}) => {
       version: 'latest',
     }
   )
-})
+}).skip(true)

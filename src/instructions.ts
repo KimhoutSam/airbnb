@@ -20,7 +20,7 @@ export default async function instructions(...args: InstructionsParameter) {
   // check if that was preview
   if ($pkg.get('version').includes('preview')) {
     const release = sink.logger.colors.bold(sink.logger.colors.yellow('^0.2.0-cjs'))
-    const warning = sink.logger.colors.bold(sink.logger.colors.yellow('^0.1.5-preview-5'))
+    const warning = sink.logger.colors.bold(sink.logger.colors.yellow($pkg.get('version')))
 
     sink.logger.warning(
       `rewrite package please wait for "${release}" then your app will be broken or you wanted to see it work as presentation please install "${warning}" to preview`

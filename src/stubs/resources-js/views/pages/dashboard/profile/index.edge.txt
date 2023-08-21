@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Profile</title>
+    @entryPointStyles('app')
+    @entryPointScripts('app')
+</head>
+
+<body>
+    <header class="flex items-center justify-between shadow">
+        <a href="{{ route('home') }}">
+            <img src="/brand-assets/icon/png/default-transparent.png" alt="adonis-js" class="w-20 h-20">
+        </a>
+        <a href="{{ route('dashboard.profile') }}">
+            <img src="{{ auth.user.avatar }}" alt="adonis-js" class="w-10 h-10">
+        </a>
+    </header>
+</body>
+
+</html>

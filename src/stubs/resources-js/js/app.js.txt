@@ -1,1 +1,13 @@
 import '../css/app.css'
+import Alpine from 'alpinejs'
+
+Alpine.data('model', () => {
+  return {
+    state: false,
+    open() {
+      this.$data.state = true
+    },
+  }
+})
+
+Alpine.start()

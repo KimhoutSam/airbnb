@@ -2,7 +2,7 @@ import { ApplicationContract } from '@ioc:Adonis/Core/Application'
 import { BaseExtendsModel } from 'adonis-rapid/models'
 import { DateTime } from 'luxon'
 
-export default function HOCRapidBaseModels(application: ApplicationContract): BaseExtendsModel {
+export default function HOFRapidBaseModels(application: ApplicationContract): BaseExtendsModel {
   const { BaseModel, column, beforeSave } = application.container.use('Adonis/Lucid/Orm')
   const Hash = application.container.use('Adonis/Core/Hash')
 
