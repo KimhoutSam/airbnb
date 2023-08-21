@@ -8,7 +8,7 @@ declare module 'adonis-rapid/instructions' {
   type InstructionsParameter = [projectRoot: string, app: ApplicationContract, sink: SinkStatic]
 
   type RapidConfiguration = {
-    stack: 'edge' | 'inertia' | 'api'
+    stack: 'static' | 'inertia' | 'api'
     settings: {
       sha: Algorithem
     }

@@ -1,10 +1,19 @@
 import { test } from '@japa/runner'
-import generator from 'totp-generator'
-import authenticator from 'authenticator'
-import qrcode from 'qrcode'
-import '../src/contract/index'
+import { install } from '../src/utils'
+import path from 'path'
 
-test('totp test', ({ expect }) => {
-  const code = generator('DLOTQLMIOJ3DDKQU')
-  console.log(code)
-}).skip(true)
+test('pkg.json test', async ({}) => {
+  await install(
+    path.join(__dirname, '..'),
+    {
+      dev: false,
+      name: 'react',
+      version: 'latest',
+    },
+    {
+      dev: false,
+      name: 'react-dom',
+      version: 'latest',
+    }
+  )
+})

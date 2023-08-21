@@ -8,7 +8,10 @@
   },
   "adonisjs": {
     "types": "adonis-rapid/build/src/contract",
-    "instructions": "adonis-rapid/build/src/instructions"
+    "instructions": "adonis-rapid/build/src/instructions",
+    "providers": [
+      "adonis-rapid/build/src/RapidProvider"
+    ]
   },
   "private": false,
   "keywords": [

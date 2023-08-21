@@ -1,10 +1,14 @@
 import type { InstructionsParameter } from 'adonis-rapid/instructions'
-import fs from 'fs-extra'
 import path from 'path'
-import { copy } from './utils'
+import { copy, install, move } from './utils'
 
 export default async function instructions(...args: InstructionsParameter) {
   const [, app, sink] = args
+
+  /**
+   * adonis-rapid package.json
+   */
+  const $pkg = new sink.files.PackageJsonFile(path.join(__dirname, '..'))
 
   sink.logger.info('|-----------------------------------------------------|')
   sink.logger.info('|                                                     |')
@@ -13,11 +17,8 @@ export default async function instructions(...args: InstructionsParameter) {
   sink.logger.info('|                                                     |')
   sink.logger.info('|-----------------------------------------------------|')
 
-  const pkg = new sink.files.PackageJsonFile(app.makePath())
-  const $pkg = new sink.files.PackageJsonFile(path.join(__dirname, '..'))
-
   // check if that was preview
-  if ($pkg.get().version.includes('preview')) {
+  if ($pkg.get('version').includes('preview')) {
     const release = sink.logger.colors.bold(sink.logger.colors.yellow('^0.2.0-cjs'))
     const warning = sink.logger.colors.bold(sink.logger.colors.yellow('^0.1.5-preview-5'))
 
@@ -26,130 +27,64 @@ export default async function instructions(...args: InstructionsParameter) {
     )
   }
 
-  if (!('@adonisjs/lucid' in pkg.get().devDependencies)) {
-    pkg.beforeInstall(() => {
-      sink.logger.log('install "@adonisjs/lucid" database')
-    })
-
-    pkg.install('@adonisjs/lucid', '^18.4.0', false)
-
-    sink.logger.success('installed "@adonisjs/lucid" database, wait for setup')
-  }
-
-  if (!('@adonisjs/auth' in pkg.get().devDependencies)) {
-    pkg.beforeInstall(() => {
-      sink.logger.log('install "@adonisjs/auth" authenticate')
-    })
-
-    pkg.install('@adonisjs/auth', '^8.2.3', false)
-
-    sink.logger.success('installed "@adonisjs/auth" authenticate, wait for setup')
-  }
-
-  if (!('@adonisjs/mail' in pkg.get().devDependencies)) {
-    pkg.beforeInstall(() => {
-      sink.logger.log('install "@adonisjs/mail" mailing')
-    })
-
-    pkg.install('@adonisjs/mail', '^8.2.1', false)
-
-    sink.logger.success('installed "@adonisjs/mail" mailing, wait for setup')
-  }
-
-  if (!('authenticator' in pkg.get().devDependencies)) {
-    pkg.beforeInstall(() => {
-      sink.logger.log('install "authenticator" generating code to two factor auth')
-    })
-
-    pkg.install('authenticator', '^1.1.5', false)
-    pkg.install('@types/authenticator', '^1.1.1', true)
-
-    sink.logger.success(
-      'installed "authenticator" generating code to two factor auth, wait for setup'
-    )
-  }
-
-  if (!('qrcode' in pkg.get().devDependencies)) {
-    pkg.beforeInstall(() => {
-      sink.logger.log('install "qrcode" generating qrcode')
-    })
-
-    pkg.install('qrcode', '^1.1.5', false)
-    pkg.install('@types/qrcode', '^1.5.1', true)
-
-    sink.logger.success('installed "qrcode" generating qrcode, wait for setup')
-  }
-
-  if (!('totp-generator' in pkg.get().devDependencies)) {
-    pkg.beforeInstall(() => {
-      sink.logger.log('install "totp-generator" testing two factor auth')
-    })
-
-    pkg.install('totp-generator', '^1.1.5', false)
-    pkg.install('@types/totp-generator', '^0.0.5', true)
-
-    sink.logger.success('installed "totp-generator" testing two factor auth, wait for setup')
-  }
-
-  if (!('generate-avatar' in pkg.get().devDependencies)) {
-    pkg.beforeInstall(() => {
-      sink.logger.log('install "generate-avatar" testing two factor auth')
-    })
-
-    pkg.install('generate-avatar', '^1.1.5', false)
-
-    sink.logger.success('installed "generate-avatar" for generating avatar')
-  }
+  await install(
+    app.makePath(),
+    {
+      dev: false,
+      name: '@adonisjs/lucid',
+      version: '^18.4.0',
+    },
+    {
+      name: '@adonisjs/auth',
+      version: '^8.2.3',
+      dev: false,
+    },
+    {
+      name: '@adonisjs/mail',
+      version: '^8.2.1',
+      dev: false,
+    },
+    {
+      name: 'generate-avatar',
+      version: '^1.1.5',
+      dev: false,
+    },
+    {
+      name: 'qrcode',
+      version: '^1.1.5',
+      dev: false,
+    },
+    {
+      name: '@types/qrcode',
+      version: '^1.5.1',
+      dev: true,
+    },
+    {
+      name: 'authenticator',
+      version: '^1.1.5',
+      dev: false,
+    },
+    {
+      name: '@types/authenticator',
+      version: '^1.1.1',
+      dev: true,
+    }
+  )
 
   const prompt = sink.getPrompt()
 
-  const bundler = await prompt.choice('what your prefer bundler?', ['webpack', 'vite'])
+  const stack = await prompt.choice('what client stack you wanted use?', [
+    'static',
+    'inertia',
+    'api',
+  ])
 
-  const stack = await prompt.choice('what client types you use?', ['static', 'inertia', 'api'])
+  await move(`${__dirname}/stubs/resources`, app.makePath('resources'), {
+    txt: '',
+  })
 
   // resources folder
-  const resourcesPath = app.makePath('resources')
-  const resourcesPathNext = app.makePath('_resources')
-
-  if (fs.existsSync(resourcesPath)) {
-    sink.logger.warning('look like your app have "resources" folder')
-    await fs.move(resourcesPath, resourcesPathNext)
-    sink.logger.success(
-      `{${sink.logger.colors.white(resourcesPath)} => ${sink.logger.colors.white(
-        resourcesPathNext
-      )}}`,
-      'moved'
-    )
-  }
-  // resources folder
-
-  // rapid config file
   await copy(`${__dirname}/stubs/rapid.ts.txt`, app.configPath('rapid.ts'), {
     stack: `'${stack}'`,
   })
-  // rapid config file
-
-  // bundler
-  if (bundler === 'vite') {
-    sink.logger.info("sorry for inconvenience i'm only setup webpack for now")
-  }
-
-  if (bundler === 'webpack') {
-    const webpackPath = app.makePath('webpack.config.js')
-    const webpackPathNext = app.makePath('_webpack.config.js')
-
-    if (fs.existsSync(webpackPath)) {
-      sink.logger.warning('look like your app have webpack config file')
-      await fs.move(webpackPath, webpackPathNext)
-      sink.logger.success(
-        `{${sink.logger.colors.white(webpackPath)} => ${sink.logger.colors.white(
-          webpackPathNext
-        )}}`,
-        'moved'
-      )
-    }
-
-    await copy(`${__dirname}/stubs/webpack.config.js.txt`, webpackPath, {})
-  }
-  // bundler
 }
