@@ -1,28 +1,8 @@
-declare module '@ioc:Adonis/Core/Application' {
-  import { User } from 'adonis-rapid/models'
-
-  interface ContainerBindings {
-    'SH8GH/Rapid/Core': {
-      UserModel: typeof User
-    }
-  }
-}
-
-declare module '@ioc:SH8GH/Rapid/Core' {
-  import { User } from 'adonis-rapid/models'
-
-  const root: {
-    UserModel: typeof User
-  }
-
-  export default root
-}
-
 declare module 'adonis-rapid/models' {
   import { DateTime } from 'luxon'
   import { BaseModel } from '@ioc:Adonis/Lucid/Orm'
 
-  class User extends BaseModel {
+  class CoreUserModel extends BaseModel {
     public id: number
     public email: string
     public password: string
@@ -37,6 +17,6 @@ declare module 'adonis-rapid/models' {
     public rememberMeToken: string | null
     public createdAt: DateTime
     public updatedAt: DateTime
-    public static defaultFromRapid(user: User): Promise<void>
+    public static defaultFromRapid(user: CoreUserModel): Promise<void>
   }
 }

@@ -1,5 +1,6 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
-import UserModelHOF from './core/models'
+import { HOFRapidUserModels } from './core/models'
+import { HOFForgotPasswordValidator, HOFLoginValidator } from './core/validator'
 
 export default class RapidProvider {
   constructor(public app: ApplicationContract) {}
@@ -9,7 +10,9 @@ export default class RapidProvider {
   public register() {
     this.app.container.singleton('SH8GH/Rapid/Core', () => {
       return {
-        UserModel: UserModelHOF(this.app),
+        UserModel: HOFRapidUserModels(this.app),
+        ForgotPasswordValidator: HOFForgotPasswordValidator(this.app),
+        LoginValidator: HOFLoginValidator(this.app),
       }
     })
   }

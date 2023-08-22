@@ -1,11 +1,24 @@
 declare module 'adonis-rapid/enum' {
   enum Features {
+    /**
+     * enable `/login` for view and login functionality
+     */
     enableLoginView = 'enable-login-view',
+
+    /**
+     * enable `/register` for view and register functionality
+     */
     enableRegisterView = 'enable-register-view',
+
     enableForgotPasswordView = 'enable-forgot-password-view',
+
     enableResetPasswordView = 'enable-reset-password-view',
+
     enableTwofactorAuthView = 'enable-two-factor-auth-view',
+
     enableVerifyEmailView = 'enable-verify-email-view',
+
+    enableDeleteUserProfile = 'enable-delete-user-profile',
   }
 
   enum Algorithem {

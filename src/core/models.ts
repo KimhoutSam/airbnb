@@ -1,10 +1,11 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
-import { User as UserFromModels } from 'adonis-rapid/models'
+import { CoreAbstraction } from 'adonis-rapid/instructions'
+import { CoreUserModel } from 'adonis-rapid/models'
 import { DateTime } from 'luxon'
 
-export default function HOFRapidBaseModels(
+export const HOFRapidUserModels: CoreAbstraction<typeof CoreUserModel> = (
   application: ApplicationContract
-): typeof UserFromModels {
+) => {
   const { BaseModel, column, beforeSave } = application.container.use('Adonis/Lucid/Orm')
   const Hash = application.container.use('Adonis/Core/Hash')
 

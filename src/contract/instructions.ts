@@ -14,4 +14,6 @@ declare module 'adonis-rapid/instructions' {
     }
     features: Features[]
   }
+
+  type CoreAbstraction<TReturns> = (app: ApplicationContract) => TReturns
 }
