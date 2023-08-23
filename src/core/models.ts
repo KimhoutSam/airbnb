@@ -3,6 +3,9 @@ import { CoreAbstraction } from 'adonis-rapid/instructions'
 import { CoreUserModel } from 'adonis-rapid/models'
 import { DateTime } from 'luxon'
 
+/**
+ * returing user models class
+ */
 export const HOFRapidUserModels: CoreAbstraction<typeof CoreUserModel> = (
   application: ApplicationContract
 ) => {

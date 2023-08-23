@@ -55,4 +55,41 @@ declare module 'adonis-rapid/validator' {
     }>
     public messages: CustomMessages
   }
+
+  class CoreUserDeleteValidator {
+    protected ctx: HttpContextContract
+    public schema: ParsedTypedSchema<{
+      email: {
+        t: string
+        getTree(): SchemaLiteral
+      }
+    }>
+    public messages: CustomMessages
+  }
+
+  class CoreVerifyEmailValidator {
+    protected ctx: HttpContextContract
+    public schema: ParsedTypedSchema<{
+      email: {
+        t: string
+        getTree(): SchemaLiteral
+      }
+    }>
+    public messages: CustomMessages
+  }
+
+  class CoreVerifyingValidator {
+    protected ctx: HttpContextContract
+    public schema: ParsedTypedSchema<{
+      email: {
+        t: string
+        getTree(): SchemaLiteral
+      }
+      signature: {
+        t: string
+        getTree(): SchemaLiteral
+      }
+    }>
+    public messages: CustomMessages
+  }
 }

@@ -1,6 +1,13 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
 import { HOFRapidUserModels } from './core/models'
-import { HOFForgotPasswordValidator, HOFLoginValidator } from './core/validator'
+import {
+  HOFForgotPasswordValidator,
+  HOFLoginValidator,
+  HOFRegisterValidator,
+  HOFUserDeleteValidator,
+  HOFVerifyEmailValidator,
+  HOFVerifyingValidator,
+} from './core/validator'
 
 export default class RapidProvider {
   constructor(public app: ApplicationContract) {}
@@ -13,6 +20,10 @@ export default class RapidProvider {
         UserModel: HOFRapidUserModels(this.app),
         ForgotPasswordValidator: HOFForgotPasswordValidator(this.app),
         LoginValidator: HOFLoginValidator(this.app),
+        RegisterValidator: HOFRegisterValidator(this.app),
+        UserDeleteValidator: HOFUserDeleteValidator(this.app),
+        VerifyEmailValidator: HOFVerifyEmailValidator(this.app),
+        VerifyingValidator: HOFVerifyingValidator(this.app),
       }
     })
   }
