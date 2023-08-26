@@ -8,10 +8,26 @@ declare module 'adonis-rapid/instructions' {
   type InstructionsParameter = [projectRoot: string, app: ApplicationContract, sink: SinkStatic]
 
   type RapidConfiguration = {
+    /**
+     * stack for application use
+     */
     stack: 'static' | 'inertia' | 'api'
+    /**
+     * authentication settings
+     */
     settings: {
+      /**
+       * set sha algorithem for 2fa
+       */
       sha: Algorithem
+      /**
+       * allow register alpha numberic
+       */
+      nameAllow: ('dash' | 'underscore' | 'space')[]
     }
+    /**
+     * allow feature
+     */
     features: Features[]
   }
 

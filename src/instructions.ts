@@ -9,6 +9,10 @@ export default async function instructions(...args: InstructionsParameter) {
    * adonis-rapid package.json
    */
   const $pkg = new sink.files.PackageJsonFile(path.join(__dirname, '..'))
+  const rc = new sink.files.AdonisRcFile(app.makePath())
+
+  sink.logger.log('Add Rapid Namespace')
+  rc.setAlias('Rapid', path.join(__dirname, 'app'))
 
   sink.logger.info('|-----------------------------------------------------|')
   sink.logger.info('|                                                     |')
@@ -29,6 +33,11 @@ export default async function instructions(...args: InstructionsParameter) {
 
   await install(
     app.makePath(),
+    {
+      name: '@adonisjs/view',
+      dev: false,
+      version: '',
+    },
     {
       dev: false,
       name: '@adonisjs/lucid',

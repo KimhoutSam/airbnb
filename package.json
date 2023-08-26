@@ -31,7 +31,7 @@
     "@adonisjs/auth": "^8.2.3",
     "@adonisjs/core": "^5.9.0",
     "@adonisjs/lucid": "^18.4.0",
-    "@adonisjs/mail": "^8.2.0",
+    "@adonisjs/mail": "^8.2.1",
     "@adonisjs/mrm-preset": "^5.0.3",
     "@adonisjs/redis": "^7.3.3",
     "@adonisjs/require-ts": "^2.0.13",
