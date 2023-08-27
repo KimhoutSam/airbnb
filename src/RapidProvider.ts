@@ -10,7 +10,13 @@ export default class RapidProvider {
   /**
    * IoC container is ready
    */
-  public async boot() {}
+  public async boot() {
+    this.app.container.withBindings(['Adonis/Core/Route'], (Route) => {
+      Route.group(() => {
+        Route.get('/login', 'LoginController.index').as('login').middleware('guest')
+      }).namespace('Rapid/Controllers/Http')
+    })
+  }
 
   /**
    * App is ready

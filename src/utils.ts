@@ -18,6 +18,10 @@ interface Packaging {
  * @param replace replace with current state
  */
 export const copy = async (src: string, dest: string, replace?: Record<string, string>) => {
+  if (fs.existsSync(dest)) {
+    sink.logger.info(`seem the "${dest}" already there so [skip].`)
+    return
+  }
   let code = await fs.readFile(src, 'utf-8')
 
   if (replace) {
@@ -65,7 +69,9 @@ export const install = async (packageRoot: string, ...packages: Packaging[]) => 
 
   packages.forEach(($package) => {
     sink.logger.info(
-      `install "${$package.name}@${$package.version}" as ${$package.dev ? 'deps' : 'devDeps'}`
+      `install "${$package.name}@${$package.version}" as ${
+        $package.dev === false ? 'deps' : 'devDeps'
+      }`
     )
     npm.install($package.name, $package.version, $package.dev).commit()
   })

@@ -9,10 +9,28 @@ export default async function instructions(...args: InstructionsParameter) {
    * adonis-rapid package.json
    */
   const $pkg = new sink.files.PackageJsonFile(path.join(__dirname, '..'))
+
+  /**
+   * application rc
+   */
   const rc = new sink.files.AdonisRcFile(app.makePath())
 
-  sink.logger.log('Add Rapid Namespace')
-  rc.setAlias('Rapid', path.join(__dirname, 'app'))
+  /**
+   * application tsconfig
+   */
+  const tsc = new sink.files.JsonFile(app.makePath(), 'tsconfig.json')
+
+  rc.setAlias('Rapid', app.makePath('node_modules', 'adonis-rapid', 'build', 'src', 'app'))
+  rc.commit()
+  sink.logger.info('Add Rapid Namespace')
+
+  const defaultPaths: Record<string, [string]> = tsc.get().compilerOptions.paths
+  tsc.set('compilerOptions.paths', {
+    ...defaultPaths,
+    Rapid: [path.join('node_modules', 'adonis-rapid', 'build', 'src', 'app')],
+  })
+  tsc.commit()
+  sink.logger.info('Add Rapid Path In Tsconfig')
 
   sink.logger.info('|-----------------------------------------------------|')
   sink.logger.info('|                                                     |')
@@ -23,11 +41,12 @@ export default async function instructions(...args: InstructionsParameter) {
 
   // check if that was preview
   if ($pkg.get('version').includes('preview')) {
-    const release = sink.logger.colors.bold(sink.logger.colors.yellow('^0.2.0-cjs'))
+    const release1 = sink.logger.colors.bold(sink.logger.colors.yellow('x.x.x-cjs-stable'))
+    const release2 = sink.logger.colors.bold(sink.logger.colors.yellow('x.x.x-esm-stable'))
     const warning = sink.logger.colors.bold(sink.logger.colors.yellow($pkg.get('version')))
 
     sink.logger.warning(
-      `rewrite package please wait for "${release}" then your app will be broken or you wanted to see it work as presentation please install "${warning}" to preview`
+      `rewrite package please wait for "${release1}" or "${release2}" then your app will be broken or you wanted to see it work as presentation please install "${warning}" to preview`
     )
   }
 
@@ -36,7 +55,7 @@ export default async function instructions(...args: InstructionsParameter) {
     {
       name: '@adonisjs/view',
       dev: false,
-      version: '',
+      version: '^6.2.0',
     },
     {
       dev: false,
@@ -82,17 +101,39 @@ export default async function instructions(...args: InstructionsParameter) {
 
   const prompt = sink.getPrompt()
 
-  const stack = await prompt.choice('what client stack you wanted use?', [
-    'static',
-    'inertia',
-    'api',
-  ])
+  const stack = await prompt.choice(
+    'what client stack you wanted use?',
+    [
+      'static',
+      'inertia-svelte',
+      'inertia-react',
+      'inertia-vue',
+      'api',
+      'ts-static',
+      'ts-inertia-svelte',
+      'ts-inertia-react',
+      'ts-inertia-vue',
+      'ts-api',
+    ],
+    {
+      default: 'ts-inertia-react',
+    }
+  )
 
-  await move(`${__dirname}/stubs/resources`, app.makePath('resources'), {
-    txt: '',
-  })
+  const replaceResources = await prompt.choice(
+    'do you want to copy default rapid views?',
+    ['yes', 'no'],
+    {
+      default: 'no',
+    }
+  )
 
-  // resources folder
+  if (replaceResources === 'yes' && stack === 'static') {
+    await move(`${__dirname}/stubs/resources-js`, app.makePath('resources'), {
+      txt: '',
+    })
+  }
+
   await copy(`${__dirname}/stubs/rapid.ts.txt`, app.configPath('rapid.ts'), {
     stack: `'${stack}'`,
   })
