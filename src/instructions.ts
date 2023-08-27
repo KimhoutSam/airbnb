@@ -8,7 +8,7 @@ export default async function instructions(...args: InstructionsParameter) {
   /**
    * adonis-rapid package.json
    */
-  const $pkg = new sink.files.PackageJsonFile(path.join(__dirname, '..'))
+  const $pkg = new sink.files.PackageJsonFile(path.join(__dirname, '..', '..'))
 
   /**
    * application rc
