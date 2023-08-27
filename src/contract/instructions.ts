@@ -1,5 +1,4 @@
 declare module 'adonis-rapid/instructions' {
-  import { Algorithem, Features } from 'adonis-rapid/enum'
   import { ApplicationContract } from '@ioc:Adonis/Core/Application'
   import * as sink from '@adonisjs/sink'
 
@@ -19,7 +18,7 @@ declare module 'adonis-rapid/instructions' {
       /**
        * set sha algorithem for 2fa
        */
-      sha: Algorithem
+      sha: import('./enum').Algorithem
       /**
        * allow register alpha numberic
        */
@@ -28,8 +27,6 @@ declare module 'adonis-rapid/instructions' {
     /**
      * allow feature
      */
-    features: Features[]
+    features: import('./enum').Features[]
   }
-
-  type CoreAbstraction<TReturns> = (app: ApplicationContract) => TReturns
 }

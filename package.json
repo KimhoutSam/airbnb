@@ -28,15 +28,6 @@
   },
   "homepage": "https://github.com/SH8GH/adonis-rapid#readme",
   "devDependencies": {
-    "@adonisjs/auth": "^8.2.3",
-    "@adonisjs/core": "^5.9.0",
-    "@adonisjs/lucid": "^18.4.0",
-    "@adonisjs/mail": "^8.2.1",
-    "@adonisjs/mrm-preset": "^5.0.3",
-    "@adonisjs/redis": "^7.3.3",
-    "@adonisjs/require-ts": "^2.0.13",
-    "@adonisjs/session": "^6.4.0",
-    "@adonisjs/view": "^6.2.0",
     "@eidellev/inertia-adonisjs": "^8.1.0",
     "@japa/api-client": "^1.4.4",
     "@japa/expect": "^2.0.2",
@@ -63,7 +54,9 @@
     "np": "^8.0.4",
     "pino-std-serializers": "^6.2.2",
     "prettier": "^3.0.1",
-    "typescript": "^5.1.6"
+    "ts-node": "^10.9.1",
+    "ttypescript": "^1.5.15",
+    "typescript": "~4.8"
   },
   "mrmConfig": {
     "core": false,
@@ -81,7 +74,7 @@
     "pretest": "npm run lint",
     "test": "node -r @adonisjs/require-ts/build/register bin/test.ts",
     "clean": "del-cli build",
-    "compile": "npm run lint && npm run clean && tsc",
+    "compile": "npm run lint && npm run clean && ttsc",
     "build": "npm run compile && cp -rf './src/stubs' './build/src'",
     "prepublishOnly": "npm run build",
     "lint": "eslint . --ext=.ts",
@@ -118,7 +111,8 @@
     "build",
     "node_modules",
     "bin",
-    "tests"
+    "tests",
+    "transformers"
   ],
   "prettier": {
     "trailingComma": "es5",
@@ -140,7 +134,18 @@
     "anyBranch": false
   },
   "dependencies": {
+    "@adonisjs/auth": "^8.2.3",
+    "@adonisjs/core": "^5.9.0",
+    "@adonisjs/fold": "^8.2.0",
+    "@adonisjs/ioc-transformer": "^2.3.4",
+    "@adonisjs/lucid": "^18.4.0",
+    "@adonisjs/mail": "^8.2.1",
+    "@adonisjs/mrm-preset": "^5.0.3",
+    "@adonisjs/redis": "^7.3.3",
+    "@adonisjs/require-ts": "^2.0.13",
+    "@adonisjs/session": "^6.4.0",
     "@adonisjs/sink": "^5.4.3",
+    "@adonisjs/view": "^6.2.0",
     "authenticator": "^1.1.5",
     "generate-avatar": "^1.4.10",
     "qrcode": "^1.5.3",

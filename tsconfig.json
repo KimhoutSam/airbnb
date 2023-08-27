@@ -4,8 +4,16 @@
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "baseUrl": ".",
-    "declaration": true
+    "declaration": true,
+    "plugins": [
+      {
+        "transform": "./transformers/ioc.ts"
+      }
+    ],
+    "paths": {
+      "Rapid/*": ["./src/app/*"]
+    }
   },
   "include": ["**/src/**/*"],
-  "exclude": ["node_modules", "build", "bin", "tests"]
+  "exclude": ["node_modules", "build", "bin", "tests", "transformers"]
 }

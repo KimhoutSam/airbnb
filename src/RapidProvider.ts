@@ -1,4 +1,5 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
+import { Features } from './contract/enum'
 
 export default class RapidProvider {
   constructor(public app: ApplicationContract) {}
@@ -13,7 +14,10 @@ export default class RapidProvider {
   public async boot() {
     this.app.container.withBindings(['Adonis/Core/Route'], (Route) => {
       Route.group(() => {
-        Route.get('/login', 'LoginController.index').as('login').middleware('guest')
+        if (this.app.config.get('rapid.features', []).includes(Features.enableLoginView)) {
+          Route.get('/login', 'LoginController.show').as('login').middleware('guest')
+          Route.post('/login', 'LoginController.store').as('login')
+        }
       }).namespace('Rapid/Controllers/Http')
     })
   }
