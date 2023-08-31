@@ -68,7 +68,7 @@ export default class RapidConfigurator {
    * get action for route name `login.store`
    */
   public getLoginStoreAction() {
-    return 'LoginViewController.store'
+    return 'LoginController.storeView'
   }
 
   /**

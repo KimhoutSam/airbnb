@@ -39,6 +39,8 @@ export default class RapidProvider {
 
     if (typeof registerShow === 'function') {
       Route.get('/register', async (context) => registerShow(context, {}))
+        .as('register.show')
+        .middleware('guest')
     }
   }
 
