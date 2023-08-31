@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/SH8GH/adonis-rapid#readme",
   "devDependencies": {
-    "@eidellev/inertia-adonisjs": "^8.1.0",
+    "@eidellev/inertia-adonisjs": "eidellev/inertiajs-adonisjs",
     "@japa/api-client": "^1.4.4",
     "@japa/expect": "^2.0.2",
     "@japa/run-failed-tests": "^1.1.1",

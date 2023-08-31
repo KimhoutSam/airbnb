@@ -20,7 +20,7 @@ export default async function instructions(...args: InstructionsParameter) {
    */
   const tsc = new sink.files.JsonFile(app.makePath(), 'tsconfig.json')
 
-  rc.setAlias('Rapid', app.makePath('node_modules', 'adonis-rapid', 'build', 'src', 'app'))
+  rc.setAlias('Rapid', path.join('node_modules', 'adonis-rapid', 'build', 'src', 'app'))
   rc.commit()
   sink.logger.info('Add Rapid Namespace')
 
@@ -116,7 +116,7 @@ export default async function instructions(...args: InstructionsParameter) {
       'ts-api',
     ],
     {
-      default: 'ts-inertia-react',
+      default: 'static',
     }
   )
 

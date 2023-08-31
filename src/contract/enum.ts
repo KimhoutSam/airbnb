@@ -2,20 +2,20 @@ export enum Features {
   /**
    * enable `/login` for view and login functionality
    */
-  enableLoginView = 'enable-login-view',
+  enableLogin = 'enable-login-view',
 
   /**
    * enable `/register` for view and register functionality
    */
-  enableRegisterView = 'enable-register-view',
+  enableRegister = 'enable-register-view',
 
-  enableForgotPasswordView = 'enable-forgot-password-view',
+  enableForgotPassword = 'enable-forgot-password-view',
 
-  enableResetPasswordView = 'enable-reset-password-view',
+  enableResetPassword = 'enable-reset-password-view',
 
-  enableTwofactorAuthView = 'enable-two-factor-auth-view',
+  enableTwofactorAuth = 'enable-two-factor-auth-view',
 
-  enableVerifyEmailView = 'enable-verify-email-view',
+  enableVerifyEmail = 'enable-verify-email-view',
 
   enableDeleteUserProfile = 'enable-delete-user-profile',
 }

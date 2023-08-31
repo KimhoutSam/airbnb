@@ -1,6 +1,8 @@
 # Adonis Rapid ( preview )
 > an redundent free auth/database/user-management configuration for adonisjs
 
+> # DO NOT HYPE I DON'T LIKE THAT AND IM APOLOGIZE ABOUT LAST MONTH CAUSE EXAM
+
 [![npm-image]][npm-url] [![license-image]][license-url] [![typescript-image]][typescript-url]
 
 A package for auto add authenticated pre-config plus if you using inertia from `eidellev/inertiajs-adonisjs`, i'm handle for you
@@ -12,11 +14,19 @@ yarn add adonis-rapid
 
 node ace configure adonis-rapid
 
-# for inertia
-node ace rapid:install inertia
+# choose between template you want
 
-# for template
-node ace rapid:install template
+"what client stack you wanted use?"
+
+> static?
+
+"do you want to copy default rapid views?"
+
+> yes?
+
+# and you good to go copy what in your base folder
+# to rapid resources app
+
 ```
 
 ## Usage
@@ -40,9 +50,9 @@ export default {
 // providers/AppProvider
 export default class AppProvider {
     public async boot() {
-        const Configurator = this.app.container.use('SH8GH/Rapid/Configurator')
+        const Features = this.app.container.use('SH8GH/Rapid/Features')
 
-        Configurator.LoginRenderer(async ({ view }, data) => {
+        Features.LoginRenderer(async ({ view }, data) => {
             return view.render('welcome', data)
         })
     }
@@ -53,14 +63,14 @@ export default class AppProvider {
 ## How To
 
 ##### With Disable
-![with disable](https://raw.githubusercontent.com/SH8GH/adonis-rapid/dev/image/disable-something.png)
+![with disable](https://raw.githubusercontent.com/SH8GH/adonis-rapid/dev-cjs/image/disable-something.png)
 
 ##### With fully enable
-![with fully enable](https://raw.githubusercontent.com/SH8GH/adonis-rapid/dev/image/fully-enable.png)
+![with fully enable](https://raw.githubusercontent.com/SH8GH/adonis-rapid/dev-cjs/image/fully-enable.png)
 
 ## Todo
 - &check; Upload Package To Npm For Test With Real World Adonis App
-- &check; Login View Route
+- &cross; Login View Route
 - &cross; Register View Route
 - &cross; Forgot Password View Route
 - &cross; Reset Password View Route
@@ -69,6 +79,7 @@ export default class AppProvider {
 - &cross; All Of View Functionality
 - &cross; Add All Of Top With Inertia
 - &cross; Manipulated User Model
+- &cross; Maximize `Configurator` Namespace With Ease
 - &cross; Write Document
 
 ## Specials Thank to

@@ -7,3 +7,4 @@
 /// <reference types="@adonisjs/view" />
 /// <reference types="@adonisjs/mail" />
 /// <reference types="@adonisjs/lucid" />
+/// <reference path="/home/hytrix/Documents/adonis-rapid/node_modules/@eidellev/inertia-adonisjs/adonis-typings/index.ts" />

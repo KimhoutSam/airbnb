@@ -2,11 +2,17 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Route from '@ioc:Adonis/Core/Route'
 
 export default class LoginController {
-  public async show({ view }: HttpContextContract) {
+  public async showInertia({ inertia }: HttpContextContract) {
+    return inertia.render('Auth/Login', {
+      hasForgotPassword: Route.has('forgot-password'),
+      hasRegister: Route.has('register'),
+    })
+  }
+
+  public async showView({ view }: HttpContextContract) {
     return view.render('pages/auth/login', {
-      rapid: {
-        hasForgotPassword: Route.has('forgot-password'),
-      },
+      hasForgotPassword: Route.has('forgot-password'),
+      hasRegister: Route.has('register'),
     })
   }
 
