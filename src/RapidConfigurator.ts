@@ -18,15 +18,15 @@ export default class RapidConfigurator {
    *  ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
    *  ### USING AT YOUR OWN RISK
    *
-   * get action for route name `login.show`
+   * get action for route name `login.index`
    */
-  public getLoginShowAction() {
+  public getLoginIndexAction() {
     if (this.app.container.hasBinding('EidelLev/Inertia')) {
-      return 'LoginController.showInertia'
+      return 'LoginController.indexInertia'
     }
 
-    if (this.actionStore.has('login.show')) {
-      const handler = this.actionStore.get('login.show') as HandlerActions<
+    if (this.actionStore.has('login.index')) {
+      const handler = this.actionStore.get('login.index') as HandlerActions<
         {
           hasForgotPassword: boolean
           hasRegister: boolean
@@ -37,13 +37,13 @@ export default class RapidConfigurator {
       return handler
     }
 
-    return 'LoginController.showView'
+    return 'LoginController.indexView'
   }
 
   /**
-   * custom your `login.show` route
+   * custom your `login.index` route
    */
-  public customLoginShowAction(
+  public customLoginIndexAction(
     action: HandlerActions<
       {
         hasForgotPassword: boolean
@@ -52,11 +52,11 @@ export default class RapidConfigurator {
       Promise<string>
     >
   ) {
-    if (this.actionStore.has('login.show')) {
+    if (this.actionStore.has('login.index')) {
       return
     }
 
-    this.actionStore.set('login.show', action)
+    this.actionStore.set('login.index', action)
   }
 
   /**
@@ -77,31 +77,31 @@ export default class RapidConfigurator {
    * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
    * ### USING AT YOUR OWN RISK
    *
-   * get action for route name `register.show`
+   * get action for route name `register.index`
    */
-  public getRegisterShowAction() {
+  public getRegisterIndexAction() {
     if (this.app.container.hasBinding('EidelLev/Inertia')) {
-      return 'RegisterInertiaController.showInertia'
+      return 'RegisterInertiaController.indexInertia'
     }
 
-    if (this.actionStore.has('register.show')) {
-      const handler = this.actionStore.get('register.show') as HandlerActions
+    if (this.actionStore.has('register.index')) {
+      const handler = this.actionStore.get('register.index') as HandlerActions
 
       return handler
     }
 
-    return 'RegisterViewController.showView'
+    return 'RegisterViewController.indexView'
   }
 
   /**
-   * custom your `register.show` route
+   * custom your `register.index` route
    */
-  public customRegisterShowAction(action: HandlerActions) {
-    if (this.actionStore.has('register.show')) {
+  public customRegisterIndexAction(action: HandlerActions) {
+    if (this.actionStore.has('register.index')) {
       return
     }
 
-    this.actionStore.set('register.show', action)
+    this.actionStore.set('register.index', action)
   }
 
   /**
@@ -114,5 +114,9 @@ export default class RapidConfigurator {
    */
   public getRegisterStoreAction() {
     return 'RegisterController.store'
+  }
+
+  public getLogoutUpdateAction() {
+    return 'LogoutController.update'
   }
 }

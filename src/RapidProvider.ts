@@ -5,21 +5,21 @@ import { RapidConfiguration } from 'adonis-rapid/instructions'
 import type RapidConfigurator from './RapidConfigurator'
 
 export default class RapidProvider {
-  public bootRouteLoginShow(Route: RouterContract, configurator: RapidConfigurator) {
-    const loginShow = configurator.getLoginShowAction()
+  public bootRouteLoginIndex(Route: RouterContract, configurator: RapidConfigurator) {
+    const loginIndex = configurator.getLoginIndexAction()
 
-    if (typeof loginShow === 'string') {
-      Route.get('/login', loginShow).as('login.show').middleware('guest')
+    if (typeof loginIndex === 'string') {
+      Route.get('/login', loginIndex).as('login.index').middleware('guest')
     }
 
-    if (typeof loginShow === 'function') {
+    if (typeof loginIndex === 'function') {
       Route.get('/login', async (context) => {
-        return loginShow(context, {
+        return loginIndex(context, {
           hasForgotPassword: Route.has('forgot-password'),
           hasRegister: Route.has('register'),
         })
       })
-        .as('login.show')
+        .as('login.index')
         .middleware('guest')
     }
   }
@@ -30,16 +30,16 @@ export default class RapidProvider {
     Route.post('/login', loginStore).as('login.store')
   }
 
-  public bootRouteRegisterShow(Route: RouterContract, configurator: RapidConfigurator) {
-    const registerShow = configurator.getRegisterShowAction()
+  public bootRouteRegisterIndex(Route: RouterContract, configurator: RapidConfigurator) {
+    const registerIndex = configurator.getRegisterIndexAction()
 
-    if (typeof registerShow === 'string') {
-      Route.get('/register', registerShow).as('register.show').middleware('guest')
+    if (typeof registerIndex === 'string') {
+      Route.get('/register', registerIndex).as('register.index').middleware('guest')
     }
 
-    if (typeof registerShow === 'function') {
-      Route.get('/register', async (context) => registerShow(context, {}))
-        .as('register.show')
+    if (typeof registerIndex === 'function') {
+      Route.get('/register', async (context) => registerIndex(context, {}))
+        .as('register.index')
         .middleware('guest')
     }
   }
@@ -48,6 +48,10 @@ export default class RapidProvider {
     const registerStore = configurator.getRegisterStoreAction()
 
     Route.post('/register', registerStore).as('register.store')
+  }
+
+  public bootRouteLogoutUser(Route: RouterContract, configurator: RapidConfigurator) {
+    Route.post('/logout', 'LogoutController.update').as('logout.update').middleware('guest')
   }
 
   constructor(public app: ApplicationContract) {}
@@ -83,6 +87,16 @@ export default class RapidProvider {
           if (rapidConfig.features.includes(Features.enableRegister)) {
             this.bootRouteRegisterShow(Route, configurator)
             this.bootRouteRegisterStore(Route, configurator)
+          }
+          if (rapidConfig.features.includes(Features.enableResetPassword)) {
+          }
+          if (rapidConfig.features.includes(Features.enableTwofactorAuth)) {
+          }
+          if (rapidConfig.features.includes(Features.enableVerifyEmail)) {
+          }
+          if (rapidConfig.features.includes(Features.enableForgotPassword)) {
+          }
+          if (rapidConfig.features.includes(Features.enableDeleteUserProfile)) {
           }
         }).namespace('Rapid/Controllers/Http')
       }
