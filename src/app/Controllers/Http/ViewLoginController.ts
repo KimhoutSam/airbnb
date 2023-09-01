@@ -1,22 +1,15 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Route from '@ioc:Adonis/Core/Route'
 
-export default class LoginController {
-  public async indexInertia({ inertia }: HttpContextContract) {
-    return inertia.render('Auth/Login', {
-      hasForgotPassword: Route.has('forgot-password'),
-      hasRegister: Route.has('register'),
-    })
-  }
-
-  public async indexView({ view }: HttpContextContract) {
+export default class ViewLoginController {
+  public async index({ view }: HttpContextContract) {
     return view.render('pages/auth/login', {
       hasForgotPassword: Route.has('forgot-password'),
       hasRegister: Route.has('register'),
     })
   }
 
-  public async storeView({ request, response, auth }: HttpContextContract) {
+  public async store({ request, response, auth }: HttpContextContract) {
     const { default: LoginValidator } = await import('../../Validators/LoginValidator')
 
     const data = await request.validate(LoginValidator)

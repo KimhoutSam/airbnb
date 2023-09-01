@@ -50,8 +50,37 @@ export default class RapidProvider {
     Route.post('/register', registerStore).as('register.store')
   }
 
-  public bootRouteLogoutUser(Route: RouterContract, configurator: RapidConfigurator) {
-    Route.post('/logout', 'LogoutController.update').as('logout.update').middleware('guest')
+  public bootRouteLogoutDistroy(Route: RouterContract, configurator: RapidConfigurator) {
+    const logoutUpdate = configurator.getLogoutUpdateAction()
+
+    Route.post('/logout', logoutUpdate).as('logout.update').middleware('guest')
+  }
+
+  public bootRouteVerifyEmailIndex(Route: RouterContract, configurator: RapidConfigurator) {
+    const verifyEmailIndex = configurator.getVerifyEmailIndexAction()
+
+    if (typeof verifyEmailIndex === 'function') {
+      Route.get('/verify-email', async (context) => {
+        return verifyEmailIndex(context, {})
+      })
+        .as('verify-email.index')
+        .middleware('guest')
+    }
+    if (typeof verifyEmailIndex === 'string') {
+      Route.get('/verify-email', verifyEmailIndex).as('verify-email.index').middleware('guest')
+    }
+  }
+
+  public bootRouteVerifyEmailStore(Route: RouterContract, configurator: RapidConfigurator) {
+    const verifyEmailStore = configurator.getVerifyEmailStoreAction()
+
+    Route.post('/verify-email', verifyEmailStore).as('verify-email.post')
+  }
+
+  public bootRouteVerifyEmailUpdate(Route: RouterContract, configurator: RapidConfigurator) {
+    const verifyEmailUpdate = configurator.getVerifyEmailUpdateAction()
+
+    Route.put('/verify-email', verifyEmailUpdate).as('verify-email.update')
   }
 
   constructor(public app: ApplicationContract) {}
@@ -75,28 +104,36 @@ export default class RapidProvider {
    */
   public async boot() {
     this.app.container.withBindings(
-      ['Adonis/Core/Route', 'SH8GH/Rapid/Configurator'],
-      (Route, configurator) => {
+      ['Adonis/Core/Route', 'SH8GH/Rapid/Configurator', 'Adonis/Core/Logger'],
+      (Route, configurator, Logger) => {
         const rapidConfig = this.app.config.get('rapid') as RapidConfiguration
 
         Route.group(() => {
           if (rapidConfig.features.includes(Features.enableLogin)) {
-            this.bootRouteLoginShow(Route, configurator)
             this.bootRouteLoginStore(Route, configurator)
+            this.bootRouteLoginIndex(Route, configurator)
+            this.bootRouteLogoutDistroy(Route, configurator)
           }
           if (rapidConfig.features.includes(Features.enableRegister)) {
-            this.bootRouteRegisterShow(Route, configurator)
+            this.bootRouteRegisterIndex(Route, configurator)
             this.bootRouteRegisterStore(Route, configurator)
           }
           if (rapidConfig.features.includes(Features.enableResetPassword)) {
+            Logger.info('this enum is not implement yet: ', Features.enableResetPassword)
           }
           if (rapidConfig.features.includes(Features.enableTwofactorAuth)) {
+            Logger.info('this enum is not implement yet: ', Features.enableTwofactorAuth)
           }
           if (rapidConfig.features.includes(Features.enableVerifyEmail)) {
+            this.bootRouteVerifyEmailIndex(Route, configurator)
+            this.bootRouteVerifyEmailStore(Route, configurator)
+            this.bootRouteVerifyEmailUpdate(Route, configurator)
           }
           if (rapidConfig.features.includes(Features.enableForgotPassword)) {
+            Logger.info('this enum is not implement yet: ', Features.enableForgotPassword)
           }
           if (rapidConfig.features.includes(Features.enableDeleteUserProfile)) {
+            Logger.info('this enum is not implement yet: ', Features.enableDeleteUserProfile)
           }
         }).namespace('Rapid/Controllers/Http')
       }

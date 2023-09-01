@@ -2,7 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Route from '@ioc:Adonis/Core/Route'
 import Mail from '@ioc:Adonis/Addons/Mail'
 
-export default class EmailVerificationsController {
+export default class InertiaEmailVerificationsController {
   public async index({ view }) {
     return view.render('pages/auth/verify-email')
   }

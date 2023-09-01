@@ -1,7 +1,8 @@
 # Adonis Rapid ( preview )
 > an redundent free auth/database/user-management configuration for adonisjs
 
-> # DO NOT HYPE I DON'T LIKE THAT AND IM APOLOGIZE ABOUT LAST MONTH CAUSE EXAM
+> ## Motivate: WHY SPEND A HOUR/DAY TRY TO SETUP AUTHENTICATION
+> ## Motivate: WHY SETUP A TEMPLATE WASTE OF TIME TO MAKE IT TO PRODUCTION
 
 [![npm-image]][npm-url] [![license-image]][license-url] [![typescript-image]][typescript-url]
 

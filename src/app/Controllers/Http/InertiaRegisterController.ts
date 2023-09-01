@@ -1,12 +1,8 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class RegisterController {
-  public async showInertia({ inertia }: HttpContextContract) {
+export default class InertiaRegisterController {
+  public async index({ inertia }: HttpContextContract) {
     return inertia.render('Auth/Register')
-  }
-
-  public async showView({ view }: HttpContextContract) {
-    return view.render('pages/auth/Register')
   }
 
   public async create({ request, session, response, auth }: HttpContextContract) {

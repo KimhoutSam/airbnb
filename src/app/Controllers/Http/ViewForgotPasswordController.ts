@@ -1,7 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Mail from '@ioc:Adonis/Addons/Mail'
 
-export default class ForgotPasswordController {
+export default class ViewForgotPasswordController {
   public async index({ view }: HttpContextContract) {
     return view.render('pages/auth/forgot-password')
   }

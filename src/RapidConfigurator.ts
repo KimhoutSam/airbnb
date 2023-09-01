@@ -22,7 +22,7 @@ export default class RapidConfigurator {
    */
   public getLoginIndexAction() {
     if (this.app.container.hasBinding('EidelLev/Inertia')) {
-      return 'LoginController.indexInertia'
+      return 'InertiaLoginController.index'
     }
 
     if (this.actionStore.has('login.index')) {
@@ -37,7 +37,153 @@ export default class RapidConfigurator {
       return handler
     }
 
-    return 'LoginController.indexView'
+    return 'ViewLoginController.index'
+  }
+
+  /**
+   * @warning
+   *
+   * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
+   * ### USING AT YOUR OWN RISK
+   *
+   * get action for route name `login.store`
+   */
+  public getLoginStoreAction() {
+    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+      return 'InertiaLoginController.store'
+    }
+
+    return 'ViewLoginController.store'
+  }
+
+  /**
+   * @warning
+   *
+   * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
+   * ### USING AT YOUR OWN RISK
+   *
+   * get action for route name `register.index`
+   */
+  public getRegisterIndexAction() {
+    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+      return 'InertiaRegisterController.index'
+    }
+
+    if (this.actionStore.has('register.index')) {
+      const handler = this.actionStore.get('register.index') as HandlerActions
+
+      return handler
+    }
+
+    return 'ViewRegisterController.index'
+  }
+
+  /**
+   * @warning
+   *
+   * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
+   * ### USING AT YOUR OWN RISK
+   *
+   * get action for route name `register.store`
+   */
+  public getRegisterStoreAction() {
+    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+      return 'InertiaRegisterController.store'
+    }
+
+    return 'ViewRegisterController.store'
+  }
+
+  /**
+   * @warning
+   *
+   * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
+   * ### USING AT YOUR OWN RISK
+   *
+   * get action for route name `logout.update`
+   */
+  public getLogoutUpdateAction() {
+    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+      return 'InertiaLogoutController.update'
+    }
+
+    return 'ViewLogoutController.update'
+  }
+
+  /**
+   * @warning
+   *
+   * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
+   * ### USING AT YOUR OWN RISK
+   *
+   * get action for route name `verify-email.index`
+   */
+  public getVerifyEmailIndexAction() {
+    if (this.actionStore.has('verify-email.index')) {
+      const handler = this.actionStore.get('verify-email.index') as HandlerActions
+
+      return handler
+    }
+
+    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+      return 'InertiaEmailVerificationsController.index'
+    }
+
+    return 'ViewEmailVerificationsController.index'
+  }
+
+  /**
+   * @warning
+   *
+   * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
+   * ### USING AT YOUR OWN RISK
+   *
+   * get action for route name `verify-email.store`
+   */
+  public getVerifyEmailStoreAction() {
+    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+      return 'InertiaEmailVerificationsController.store'
+    }
+
+    return 'ViewEmailVerificationsController.store'
+  }
+
+  /**
+   * @warning
+   *
+   * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
+   * ### USING AT YOUR OWN RISK
+   *
+   * get action for route name `verify-email.update`
+   */
+  public getVerifyEmailUpdateAction() {
+    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+      return 'InertiaEmailVerificationsController.update'
+    }
+
+    return 'ViewEmailVerificationsController.update'
+  }
+
+  /**
+   * custom your `verify-email.index` route
+   */
+  public customVerifyEmailIndexAction(action: HandlerActions) {
+    if (this.actionStore.has('verify-email.index')) {
+      return
+    }
+
+    this.actionStore.set('verify-email.index', action)
+  }
+
+  /**
+   * custom your `register.index` route
+   */
+  public customRegisterIndexAction(action: HandlerActions) {
+    if (this.actionStore.has('register.index')) {
+      return
+    }
+
+    this.actionStore.set('register.index', action)
   }
 
   /**
@@ -57,66 +203,5 @@ export default class RapidConfigurator {
     }
 
     this.actionStore.set('login.index', action)
-  }
-
-  /**
-   * @warning
-   *
-   * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
-   * ### USING AT YOUR OWN RISK
-   *
-   * get action for route name `login.store`
-   */
-  public getLoginStoreAction() {
-    return 'LoginController.storeView'
-  }
-
-  /**
-   * @warning
-   *
-   * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
-   * ### USING AT YOUR OWN RISK
-   *
-   * get action for route name `register.index`
-   */
-  public getRegisterIndexAction() {
-    if (this.app.container.hasBinding('EidelLev/Inertia')) {
-      return 'RegisterInertiaController.indexInertia'
-    }
-
-    if (this.actionStore.has('register.index')) {
-      const handler = this.actionStore.get('register.index') as HandlerActions
-
-      return handler
-    }
-
-    return 'RegisterViewController.indexView'
-  }
-
-  /**
-   * custom your `register.index` route
-   */
-  public customRegisterIndexAction(action: HandlerActions) {
-    if (this.actionStore.has('register.index')) {
-      return
-    }
-
-    this.actionStore.set('register.index', action)
-  }
-
-  /**
-   * @warning
-   *
-   * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
-   * ### USING AT YOUR OWN RISK
-   *
-   * get action for route name `register.store`
-   */
-  public getRegisterStoreAction() {
-    return 'RegisterController.store'
-  }
-
-  public getLogoutUpdateAction() {
-    return 'LogoutController.update'
   }
 }
