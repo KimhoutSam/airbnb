@@ -85,13 +85,14 @@ export default class AppProvider {
 
 ## Specials Thank to
 
-- [Laravel Jetstream](https://jetstream.laravel.com/)
-- [Adonisjs Teams](https://adonisjs.com/)
+- [Laravel Jetstream](https://jetstream.laravel.com/) for idea.
+- [Adonisjs Teams](https://adonisjs.com/) for best package develpment
 
 # Note: 
 - this is my first project so i do not know to manage project.
 - this is my frustrated when create a app and always need authentication.
 - this is my problem so make sure don't break your stuff so don't install for now.
+
 
 [npm-image]: https://img.shields.io/npm/v/adonis-rapid.svg?style=for-the-badge&logo=npm
 [npm-url]: https://npmjs.org/package/adonis-rapid "npm"

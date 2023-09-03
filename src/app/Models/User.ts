@@ -13,7 +13,13 @@ export default class User extends BaseModel {
   public password: string
 
   @column()
-  public name: string
+  public firstName: string
+
+  @column()
+  public lastName: string
+
+  @column()
+  public middleName: string | null
 
   @column()
   public emailVerifiedAt: DateTime
@@ -45,12 +51,16 @@ export default class User extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
+  public getName() {
+    return [this.firstName, this.middleName, this.lastName].join(' ')
+  }
+
   @beforeSave()
   public static async defaultFromRapid(user: User) {
     if (user.avatar === null) {
       const { generateFromString } = await import('generate-avatar')
 
-      user.avatar = `data:image/svg+xml;utf8,${generateFromString(user.name)}`
+      user.avatar = `data:image/svg+xml;utf8,${generateFromString(user.getName())}`
     }
 
     if (user.$dirty.password) {

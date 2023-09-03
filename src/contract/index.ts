@@ -1,7 +1,6 @@
 /// <reference types="@adonisjs/core" />
 /// <reference path="./instructions.ts" />
 /// <reference path="./enum.ts" />
-/// <reference path="./auth.ts" />
 /// <reference types="@adonisjs/auth" />
 /// <reference types="@adonisjs/session" />
 /// <reference types="@adonisjs/view" />

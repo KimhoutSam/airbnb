@@ -138,6 +138,44 @@ export default class RapidConfigurator {
    * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
    * ### USING AT YOUR OWN RISK
    *
+   * get action for route name `forgot-password.index`
+   */
+  public getForgotPasswordIndexAction() {
+    if (this.actionStore.has('forgot-password.index')) {
+      const handler = this.actionStore.get('forgot-password.index') as HandlerActions
+
+      return handler
+    }
+
+    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+      return 'InertiaForgotPasswordController.index'
+    }
+
+    return 'ViewForgotPasswordController.index'
+  }
+
+  /**
+   * @warning
+   *
+   * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
+   * ### USING AT YOUR OWN RISK
+   *
+   * get action for route name `forgot-password.update`
+   */
+  public getForgotPasswordUpdateAction() {
+    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+      return 'InertiaForgotPasswordController.update'
+    }
+
+    return 'ViewForgotPasswordController.update'
+  }
+
+  /**
+   * @warning
+   *
+   * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
+   * ### USING AT YOUR OWN RISK
+   *
    * get action for route name `verify-email.store`
    */
   public getVerifyEmailStoreAction() {
@@ -156,12 +194,39 @@ export default class RapidConfigurator {
    *
    * get action for route name `verify-email.update`
    */
+  public getUserDistroyAction() {
+    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+      return 'InertiaUsersController.distroy'
+    }
+
+    return 'ViewUsersController.distroy'
+  }
+
+  /**
+   * @warning
+   *
+   * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
+   * ### USING AT YOUR OWN RISK
+   *
+   * get action for route name `verify-email.update`
+   */
   public getVerifyEmailUpdateAction() {
     if (this.app.container.hasBinding('EidelLev/Inertia')) {
       return 'InertiaEmailVerificationsController.update'
     }
 
     return 'ViewEmailVerificationsController.update'
+  }
+
+  /**
+   * custom your `forgot-password.index` route
+   */
+  public customForgotPasswordIndexAction(action: HandlerActions) {
+    if (this.actionStore.has('forgot-password.index')) {
+      return
+    }
+
+    this.actionStore.set('forgot-password.index', action)
   }
 
   /**
@@ -203,5 +268,17 @@ export default class RapidConfigurator {
     }
 
     this.actionStore.set('login.index', action)
+  }
+
+  public IndexActionRenderer(_key: string, _action: Function) {
+    console.log(
+      'this only preview but in version 0.8.0-cjs will be avalible and some of `get[???]Action` or `custom[???]Action` will be remove'
+    )
+  }
+
+  public ActionGetter(_key: string) {
+    console.log(
+      'this only preview but in version 0.8.0-cjs will be avalible and some of `get[???]Action` or `custom[???]Action` will be remove'
+    )
   }
 }

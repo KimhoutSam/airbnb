@@ -75,7 +75,7 @@
     "test": "node -r @adonisjs/require-ts/build/register bin/test.ts",
     "clean": "del-cli build",
     "compile": "npm run lint && npm run clean && ttsc",
-    "build": "npm run compile && cp -rf './src/stubs' './build/src'",
+    "build": "npm run compile && cp -rf './src/stubs' './build/src' && rm -rf './build/src/contract/auth.js' './build/src/contract/auth.d.ts'",
     "prepublishOnly": "npm run build",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",

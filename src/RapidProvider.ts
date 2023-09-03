@@ -83,6 +83,35 @@ export default class RapidProvider {
     Route.put('/verify-email', verifyEmailUpdate).as('verify-email.update')
   }
 
+  public bootRouteForgotPasswordIndex(Route: RouterContract, configurator: RapidConfigurator) {
+    const forgotPasswprdIndex = configurator.getForgotPasswordIndexAction()
+
+    if (typeof forgotPasswprdIndex === 'function') {
+      Route.get('/forgot-password', async (context) => {
+        return forgotPasswprdIndex(context, {})
+      })
+        .as('forgot-password.index')
+        .middleware('guest')
+    }
+    if (typeof forgotPasswprdIndex === 'string') {
+      Route.get('/forgot-password', forgotPasswprdIndex)
+        .as('forgot-password.index')
+        .middleware('guest')
+    }
+  }
+
+  public bootRouteForgotPasswordUpdate(Route: RouterContract, configurator: RapidConfigurator) {
+    const forgotPasswprdUpdate = configurator.getForgotPasswordUpdateAction()
+
+    Route.post('/forgot-password', forgotPasswprdUpdate).as('forgot-password.update')
+  }
+
+  public bootRouteUserDistory(Route: RouterContract, configurator: RapidConfigurator) {
+    const usersDistroy = configurator.getUserDistroyAction()
+
+    Route.delete('/user', usersDistroy).as('user.distroy')
+  }
+
   constructor(public app: ApplicationContract) {}
 
   /**
@@ -119,10 +148,10 @@ export default class RapidProvider {
             this.bootRouteRegisterStore(Route, configurator)
           }
           if (rapidConfig.features.includes(Features.enableResetPassword)) {
-            Logger.info('this enum is not implement yet: ', Features.enableResetPassword)
+            Logger.info('this enum is not implement yet: {{ Features.enableResetPassword }}')
           }
           if (rapidConfig.features.includes(Features.enableTwofactorAuth)) {
-            Logger.info('this enum is not implement yet: ', Features.enableTwofactorAuth)
+            Logger.info('this enum is not implement yet: {{ Features.enableTwofactorAuth }}')
           }
           if (rapidConfig.features.includes(Features.enableVerifyEmail)) {
             this.bootRouteVerifyEmailIndex(Route, configurator)
@@ -130,10 +159,11 @@ export default class RapidProvider {
             this.bootRouteVerifyEmailUpdate(Route, configurator)
           }
           if (rapidConfig.features.includes(Features.enableForgotPassword)) {
-            Logger.info('this enum is not implement yet: ', Features.enableForgotPassword)
+            this.bootRouteForgotPasswordIndex(Route, configurator)
+            this.bootRouteForgotPasswordUpdate(Route, configurator)
           }
           if (rapidConfig.features.includes(Features.enableDeleteUserProfile)) {
-            Logger.info('this enum is not implement yet: ', Features.enableDeleteUserProfile)
+            this.bootRouteUserDistory(Route, configurator)
           }
         }).namespace('Rapid/Controllers/Http')
       }

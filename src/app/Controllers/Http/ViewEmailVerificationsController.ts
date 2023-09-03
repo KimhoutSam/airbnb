@@ -29,10 +29,10 @@ export default class ViewEmailVerificationsController {
     return await Mail.sendLater((message) => {
       message
         .from(request.completeUrl())
-        .to(user.email, user.name)
-        .subject(`welcome to application! ${user.name}`)
+        .to(user.email, user.getName())
+        .subject(`welcome to application! ${user.getName()}`)
         .htmlView('partials/email', {
-          user: { fullName: user.name },
+          user: { fullName: user.getName() },
           url: `${request.protocol()}://${request.host()}${url}&email=${user.email}`,
         })
     })
