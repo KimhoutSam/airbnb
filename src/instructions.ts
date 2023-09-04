@@ -1,4 +1,4 @@
-import type { InstructionsParameter } from 'adonis-rapid/instructions'
+import type { InstructionsParameter } from './contract/instructions'
 import path from 'path'
 import { copy, install, move } from './utils'
 
@@ -104,11 +104,11 @@ export default async function instructions(...args: InstructionsParameter) {
   const stack = await prompt.choice(
     'what client stack you wanted use?',
     [
-      'static',
-      'inertia-svelte',
-      'inertia-react',
-      'inertia-vue',
-      'api',
+      'js-static',
+      'js-inertia-svelte',
+      'js-inertia-react',
+      'js-inertia-vue',
+      'js-api',
       'ts-static',
       'ts-inertia-svelte',
       'ts-inertia-react',
@@ -116,7 +116,7 @@ export default async function instructions(...args: InstructionsParameter) {
       'ts-api',
     ],
     {
-      default: 'static',
+      default: 'js-static',
     }
   )
 
@@ -128,7 +128,7 @@ export default async function instructions(...args: InstructionsParameter) {
     }
   )
 
-  if (replaceResources === 'yes' && stack === 'static') {
+  if (replaceResources === 'yes' && stack === 'js-static') {
     await move(`${__dirname}/stubs/resources-js`, app.makePath('resources'), {
       txt: '',
     })

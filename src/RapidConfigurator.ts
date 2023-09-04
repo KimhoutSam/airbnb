@@ -1,4 +1,4 @@
-import { RapidConfiguration } from 'adonis-rapid/instructions'
+import { RapidConfiguration } from './contract/instructions'
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
 import { ActionStoreKey, HandlerActions } from './contract/types'
 
@@ -200,6 +200,46 @@ export default class RapidConfigurator {
     }
 
     return 'ViewUsersController.distroy'
+  }
+
+  /**
+   * @warning
+   *
+   * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
+   * ### USING AT YOUR OWN RISK
+   *
+   * get action for route name `verify-email.update`
+   */
+  public getUserUpdateAction<TKey extends 'password' | 'avatar' | 'name'>(key?: TKey) {
+    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+      if (key === 'avatar') {
+        return 'InertiaUsersController.updateAvatar'
+      }
+
+      if (key === 'name') {
+        return 'InertiaUsersController.updateName'
+      }
+
+      if (key === 'password') {
+        return 'InertiaUsersController.updatePassword'
+      }
+
+      return 'InertiaUsersController.updateEmail'
+    }
+
+    if (key === 'avatar') {
+      return 'ViewUsersController.updateAvatar'
+    }
+
+    if (key === 'name') {
+      return 'ViewUsersController.updateName'
+    }
+
+    if (key === 'password') {
+      return 'ViewUsersController.updatePassword'
+    }
+
+    return 'ViewUsersController.updateEmail'
   }
 
   /**

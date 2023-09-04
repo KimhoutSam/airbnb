@@ -1,32 +1,35 @@
-declare module 'adonis-rapid/instructions' {
-  import { ApplicationContract } from '@ioc:Adonis/Core/Application'
-  import * as sink from '@adonisjs/sink'
+import { ApplicationContract } from '@ioc:Adonis/Core/Application'
+import * as sink from '@adonisjs/sink'
+import { Algorithem, Features } from './enum'
 
-  type SinkStatic = typeof sink
+type SinkStatic = typeof sink
 
-  type InstructionsParameter = [projectRoot: string, app: ApplicationContract, sink: SinkStatic]
+export type InstructionsParameter = [
+  projectRoot: string,
+  app: ApplicationContract,
+  sink: SinkStatic,
+]
 
-  type RapidConfiguration = {
+export type RapidConfiguration = {
+  /**
+   * stack for application use
+   */
+  stack: 'static' | 'inertia' | 'api'
+  /**
+   * authentication settings
+   */
+  settings: {
     /**
-     * stack for application use
+     * set sha algorithem for 2fa
      */
-    stack: 'static' | 'inertia' | 'api'
+    sha: Algorithem
     /**
-     * authentication settings
+     * allow name register alpha numberic
      */
-    settings: {
-      /**
-       * set sha algorithem for 2fa
-       */
-      sha: import('./enum').Algorithem
-      /**
-       * allow register alpha numberic
-       */
-      nameAllow: ('dash' | 'underscore' | 'space')[]
-    }
-    /**
-     * allow feature
-     */
-    features: import('./enum').Features[]
+    nameAllow: ('dash' | 'underscore' | 'space')[]
   }
+  /**
+   * allow feature
+   */
+  features: Features[]
 }

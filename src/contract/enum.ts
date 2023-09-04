@@ -1,23 +1,16 @@
 export enum Features {
-  /**
-   * enable `/login` for view and login functionality
-   */
-  enableLogin = 'enable-login-view',
-
-  /**
-   * enable `/register` for view and register functionality
-   */
-  enableRegister = 'enable-register-view',
-
-  enableForgotPassword = 'enable-forgot-password-view',
-
-  enableResetPassword = 'enable-reset-password-view',
-
-  enableTwofactorAuth = 'enable-two-factor-auth-view',
-
-  enableVerifyEmail = 'enable-verify-email-view',
-
-  enableDeleteUserProfile = 'enable-delete-user-profile',
+  enableLogin = 'enable-login',
+  enableRegister = 'enable-register',
+  enableForgotPassword = 'enable-forgot-password',
+  enableResetPassword = 'enable-reset-password',
+  enableConfirmPassword = 'enable-confirm-password',
+  enableTwofactorAuth = 'enable-two-factor-auth',
+  enableVerifyEmail = 'enable-verify-email',
+  enableDistroyUserProfile = 'enable-distroy-user-profile',
+  enableUpdateUserPassword = 'enable-update-user-password',
+  enableUpdateUserAvatar = 'enable-update-user-avatar',
+  enableUpdateUserName = 'enable-update-user-name',
+  enableUpdateUserEmail = 'enable-update-user-email',
 }
 
 export enum Algorithem {

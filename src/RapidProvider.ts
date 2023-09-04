@@ -1,7 +1,9 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
 import { Features } from './contract/enum'
 import { RouterContract } from '@ioc:Adonis/Core/Route'
-import { RapidConfiguration } from 'adonis-rapid/instructions'
+import { RapidConfiguration } from './contract/instructions'
+import { clsx, ClassValue } from 'clsx'
+import { twMerge } from 'tailwind-merge'
 import type RapidConfigurator from './RapidConfigurator'
 
 export default class RapidProvider {
@@ -109,7 +111,28 @@ export default class RapidProvider {
   public bootRouteUserDistory(Route: RouterContract, configurator: RapidConfigurator) {
     const usersDistroy = configurator.getUserDistroyAction()
 
-    Route.delete('/user', usersDistroy).as('user.distroy')
+    Route.delete('/user-delete', usersDistroy).as('user.distroy')
+  }
+
+  public bootRouteUserUpdateEmail(Route: RouterContract, configurator: RapidConfigurator) {
+    const userUpdateEmail = configurator.getUserUpdateAction()
+    Route.patch('/user-email', userUpdateEmail).as('user.update.email')
+  }
+
+  public bootRouteUserUpdateName(Route: RouterContract, configurator: RapidConfigurator) {
+    const userUpdateName = configurator.getUserUpdateAction('name')
+    Route.patch('/user-name', userUpdateName).as('user.update.name')
+  }
+
+  public bootRouteUserUpdateAvatar(Route: RouterContract, configurator: RapidConfigurator) {
+    const userUpdateAvatar = configurator.getUserUpdateAction('avatar')
+    Route.patch('/user-avatar', userUpdateAvatar).as('user.update.avatar')
+  }
+
+  public bootRouteUserUpdatePassword(Route: RouterContract, configurator: RapidConfigurator) {
+    const userUpdatePassword = configurator.getUserUpdateAction('password')
+
+    Route.patch('/user-password', userUpdatePassword).as('user.update.password')
   }
 
   constructor(public app: ApplicationContract) {}
@@ -132,6 +155,11 @@ export default class RapidProvider {
    * IoC container is ready
    */
   public async boot() {
+    const View = this.app.container.use('Adonis/Core/View')
+
+    View.global('cn', (...args: ClassValue[]) => clsx(...args))
+    View.global('twcn', (...args: ClassValue[]) => twMerge(clsx(...args)))
+
     this.app.container.withBindings(
       ['Adonis/Core/Route', 'SH8GH/Rapid/Configurator', 'Adonis/Core/Logger'],
       (Route, configurator, Logger) => {
@@ -148,10 +176,22 @@ export default class RapidProvider {
             this.bootRouteRegisterStore(Route, configurator)
           }
           if (rapidConfig.features.includes(Features.enableResetPassword)) {
-            Logger.info('this enum is not implement yet: {{ Features.enableResetPassword }}')
           }
           if (rapidConfig.features.includes(Features.enableTwofactorAuth)) {
-            Logger.info('this enum is not implement yet: {{ Features.enableTwofactorAuth }}')
+          }
+          if (rapidConfig.features.includes(Features.enableConfirmPassword)) {
+          }
+          if (rapidConfig.features.includes(Features.enableUpdateUserAvatar)) {
+            this.bootRouteUserUpdateAvatar(Route, configurator)
+          }
+          if (rapidConfig.features.includes(Features.enableUpdateUserEmail)) {
+            this.bootRouteUserUpdateEmail(Route, configurator)
+          }
+          if (rapidConfig.features.includes(Features.enableUpdateUserName)) {
+            this.bootRouteUserUpdateName(Route, configurator)
+          }
+          if (rapidConfig.features.includes(Features.enableUpdateUserPassword)) {
+            this.bootRouteUserUpdatePassword(Route, configurator)
           }
           if (rapidConfig.features.includes(Features.enableVerifyEmail)) {
             this.bootRouteVerifyEmailIndex(Route, configurator)
@@ -162,7 +202,7 @@ export default class RapidProvider {
             this.bootRouteForgotPasswordIndex(Route, configurator)
             this.bootRouteForgotPasswordUpdate(Route, configurator)
           }
-          if (rapidConfig.features.includes(Features.enableDeleteUserProfile)) {
+          if (rapidConfig.features.includes(Features.enableDistroyUserProfile)) {
             this.bootRouteUserDistory(Route, configurator)
           }
         }).namespace('Rapid/Controllers/Http')

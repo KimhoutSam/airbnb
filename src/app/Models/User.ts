@@ -51,10 +51,6 @@ export default class User extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  public getName() {
-    return [this.firstName, this.middleName, this.lastName].join(' ')
-  }
-
   @beforeSave()
   public static async defaultFromRapid(user: User) {
     if (user.avatar === null) {
