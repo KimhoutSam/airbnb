@@ -115,22 +115,22 @@ export default class RapidProvider {
   }
 
   public bootRouteUserUpdateEmail(Route: RouterContract, configurator: RapidConfigurator) {
-    const userUpdateEmail = configurator.getUserUpdateAction()
+    const userUpdateEmail = configurator.getUserUpdateEmailAction()
     Route.patch('/user-email', userUpdateEmail).as('user.update.email')
   }
 
   public bootRouteUserUpdateName(Route: RouterContract, configurator: RapidConfigurator) {
-    const userUpdateName = configurator.getUserUpdateAction('name')
+    const userUpdateName = configurator.getUserUpdateNameAction()
     Route.patch('/user-name', userUpdateName).as('user.update.name')
   }
 
   public bootRouteUserUpdateAvatar(Route: RouterContract, configurator: RapidConfigurator) {
-    const userUpdateAvatar = configurator.getUserUpdateAction('avatar')
+    const userUpdateAvatar = configurator.getUserUpdateAvatarAction()
     Route.patch('/user-avatar', userUpdateAvatar).as('user.update.avatar')
   }
 
   public bootRouteUserUpdatePassword(Route: RouterContract, configurator: RapidConfigurator) {
-    const userUpdatePassword = configurator.getUserUpdateAction('password')
+    const userUpdatePassword = configurator.getUserUpdatePasswordAction()
 
     Route.patch('/user-password', userUpdatePassword).as('user.update.password')
   }
@@ -162,7 +162,7 @@ export default class RapidProvider {
 
     this.app.container.withBindings(
       ['Adonis/Core/Route', 'SH8GH/Rapid/Configurator', 'Adonis/Core/Logger'],
-      (Route, configurator, Logger) => {
+      (Route, configurator, _Logger) => {
         const rapidConfig = this.app.config.get('rapid') as RapidConfiguration
 
         Route.group(() => {

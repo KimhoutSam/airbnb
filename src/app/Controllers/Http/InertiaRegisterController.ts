@@ -22,9 +22,7 @@ export default class InertiaRegisterController {
 
     const user = await User.create({
       avatar: null,
-      lastName: data.last_name,
-      firstName: data.first_name,
-      middleName: data.middle_name,
+      name: data.name,
       password: data.password,
       avatar_url: null,
       email: data.uid,

@@ -30,6 +30,16 @@ const config: RapidConfiguration = {
   */
   settings: {
     sha: Algorithem.SHA1,
+    nameAllow: ['dash', 'underscore', 'space'],
+    degit: 6,
+    period: 30,
+    color: {
+      background: 'lightgray',
+      text: 'black',
+    },
+    display(user) {
+      return user.email
+    },
   },
 
   /*

@@ -96,6 +96,16 @@ export default async function instructions(...args: InstructionsParameter) {
       name: '@types/authenticator',
       version: '^1.1.1',
       dev: true,
+    },
+    {
+      name: 'color',
+      version: '^4.2.3',
+      dev: false,
+    },
+    {
+      name: '@types/color',
+      version: '^3.0.4',
+      dev: true,
     }
   )
 

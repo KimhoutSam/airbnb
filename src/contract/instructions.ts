@@ -1,6 +1,8 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
 import * as sink from '@adonisjs/sink'
 import { Algorithem, Features } from './enum'
+import { DataType } from 'csstype'
+import User from 'Rapid/Models/User'
 
 type SinkStatic = typeof sink
 
@@ -27,6 +29,25 @@ export type RapidConfiguration = {
      * allow name register alpha numberic
      */
     nameAllow: ('dash' | 'underscore' | 'space')[]
+    /**
+     * degit of number
+     */
+    degit: 6 | 8
+    /**
+     * period of renew
+     */
+    period: 30 | 60
+    /**
+     * qrcode color
+     */
+    color: {
+      background: DataType.NamedColor
+      text: DataType.NamedColor
+    }
+    /**
+     * display user in authenticator
+     */
+    display(user: User): string
   }
   /**
    * allow feature

@@ -21,7 +21,7 @@ export default class RapidConfigurator {
    * get action for route name `login.index`
    */
   public getLoginIndexAction() {
-    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+    if (this.app.container.hasBinding('EidelLev/Inertia') && this.baseConfig.stack === 'inertia') {
       return 'InertiaLoginController.index'
     }
 
@@ -49,7 +49,7 @@ export default class RapidConfigurator {
    * get action for route name `login.store`
    */
   public getLoginStoreAction() {
-    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+    if (this.app.container.hasBinding('EidelLev/Inertia') && this.baseConfig.stack === 'inertia') {
       return 'InertiaLoginController.store'
     }
 
@@ -65,7 +65,7 @@ export default class RapidConfigurator {
    * get action for route name `register.index`
    */
   public getRegisterIndexAction() {
-    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+    if (this.app.container.hasBinding('EidelLev/Inertia') && this.baseConfig.stack === 'inertia') {
       return 'InertiaRegisterController.index'
     }
 
@@ -87,7 +87,7 @@ export default class RapidConfigurator {
    * get action for route name `register.store`
    */
   public getRegisterStoreAction() {
-    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+    if (this.app.container.hasBinding('EidelLev/Inertia') && this.baseConfig.stack === 'inertia') {
       return 'InertiaRegisterController.store'
     }
 
@@ -103,7 +103,7 @@ export default class RapidConfigurator {
    * get action for route name `logout.update`
    */
   public getLogoutUpdateAction() {
-    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+    if (this.app.container.hasBinding('EidelLev/Inertia') && this.baseConfig.stack === 'inertia') {
       return 'InertiaLogoutController.update'
     }
 
@@ -125,7 +125,7 @@ export default class RapidConfigurator {
       return handler
     }
 
-    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+    if (this.app.container.hasBinding('EidelLev/Inertia') && this.baseConfig.stack === 'inertia') {
       return 'InertiaEmailVerificationsController.index'
     }
 
@@ -147,7 +147,7 @@ export default class RapidConfigurator {
       return handler
     }
 
-    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+    if (this.app.container.hasBinding('EidelLev/Inertia') && this.baseConfig.stack === 'inertia') {
       return 'InertiaForgotPasswordController.index'
     }
 
@@ -163,7 +163,7 @@ export default class RapidConfigurator {
    * get action for route name `forgot-password.update`
    */
   public getForgotPasswordUpdateAction() {
-    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+    if (this.app.container.hasBinding('EidelLev/Inertia') && this.baseConfig.stack === 'inertia') {
       return 'InertiaForgotPasswordController.update'
     }
 
@@ -179,7 +179,7 @@ export default class RapidConfigurator {
    * get action for route name `verify-email.store`
    */
   public getVerifyEmailStoreAction() {
-    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+    if (this.app.container.hasBinding('EidelLev/Inertia') && this.baseConfig.stack === 'inertia') {
       return 'InertiaEmailVerificationsController.store'
     }
 
@@ -195,7 +195,7 @@ export default class RapidConfigurator {
    * get action for route name `verify-email.update`
    */
   public getUserDistroyAction() {
-    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+    if (this.app.container.hasBinding('EidelLev/Inertia') && this.baseConfig.stack === 'inertia') {
       return 'InertiaUsersController.distroy'
     }
 
@@ -208,35 +208,11 @@ export default class RapidConfigurator {
    * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
    * ### USING AT YOUR OWN RISK
    *
-   * get action for route name `verify-email.update`
+   * get action for route name `user.update.email`
    */
-  public getUserUpdateAction<TKey extends 'password' | 'avatar' | 'name'>(key?: TKey) {
-    if (this.app.container.hasBinding('EidelLev/Inertia')) {
-      if (key === 'avatar') {
-        return 'InertiaUsersController.updateAvatar'
-      }
-
-      if (key === 'name') {
-        return 'InertiaUsersController.updateName'
-      }
-
-      if (key === 'password') {
-        return 'InertiaUsersController.updatePassword'
-      }
-
+  public getUserUpdateEmailAction() {
+    if (this.app.container.hasBinding('EidelLev/Inertia') && this.baseConfig.stack === 'inertia') {
       return 'InertiaUsersController.updateEmail'
-    }
-
-    if (key === 'avatar') {
-      return 'ViewUsersController.updateAvatar'
-    }
-
-    if (key === 'name') {
-      return 'ViewUsersController.updateName'
-    }
-
-    if (key === 'password') {
-      return 'ViewUsersController.updatePassword'
     }
 
     return 'ViewUsersController.updateEmail'
@@ -248,10 +224,57 @@ export default class RapidConfigurator {
    * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
    * ### USING AT YOUR OWN RISK
    *
+   * get action for route name `user.update.password`
+   */
+  public getUserUpdatePasswordAction() {
+    if (this.app.container.hasBinding('EidelLev/Inertia') && this.baseConfig.stack === 'inertia') {
+      return 'InertiaUsersController.updatePassword'
+    }
+
+    return 'ViewUsersController.updatePassword'
+  }
+
+  /**
+   * @warning
+   *
+   * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
+   * ### USING AT YOUR OWN RISK
+   *
+   * get action for route name `user.update.name`
+   */
+  public getUserUpdateNameAction() {
+    if (this.app.container.hasBinding('EidelLev/Inertia') && this.baseConfig.stack === 'inertia') {
+      return 'InertiaUsersController.updateName'
+    }
+    return 'ViewUsersController.updateName'
+  }
+
+  /**
+   * @warning
+   *
+   * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
+   * ### USING AT YOUR OWN RISK
+   *
+   * get action for route name `user.update.avatar`
+   */
+  public getUserUpdateAvatarAction() {
+    if (this.app.container.hasBinding('EidelLev/Inertia') && this.baseConfig.stack === 'inertia') {
+      return 'InertiaUsersController.updateAvatar'
+    }
+
+    return 'ViewUsersController.updateName'
+  }
+
+  /**
+   * @warning
+   *
+   * ### THIS IS NOT FOR DEVELOPER USING | ONLY MAINTAINER
+   * ### USING AT YOUR OWN RISK
+   *
    * get action for route name `verify-email.update`
    */
   public getVerifyEmailUpdateAction() {
-    if (this.app.container.hasBinding('EidelLev/Inertia')) {
+    if (this.app.container.hasBinding('EidelLev/Inertia') && this.baseConfig.stack === 'inertia') {
       return 'InertiaEmailVerificationsController.update'
     }
 
@@ -310,15 +333,15 @@ export default class RapidConfigurator {
     this.actionStore.set('login.index', action)
   }
 
-  public IndexActionRenderer(_key: string, _action: Function) {
-    console.log(
-      'this only preview but in version 0.8.0-cjs will be avalible and some of `get[???]Action` or `custom[???]Action` will be remove'
-    )
-  }
+  // public indexActionClosure(_key: string, _action: Function) {
+  //   console.log(
+  //     'this only preview but in version 0.8.0-cjs will be avalible and some of `get[???]Action` or `custom[???]Action` will be remove'
+  //   )
+  // }
 
-  public ActionGetter(_key: string) {
-    console.log(
-      'this only preview but in version 0.8.0-cjs will be avalible and some of `get[???]Action` or `custom[???]Action` will be remove'
-    )
-  }
+  // public retriveActionKey(_key: string) {
+  //   console.log(
+  //     'this only ex but in version 0.8.0-cjs will be avalible and some of `get[???]Action` or `custom[???]Action` will be remove'
+  //   )
+  // }
 }

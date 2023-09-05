@@ -26,9 +26,7 @@ export default class UserUpdateNameValidator {
   public schema = schema.create({
     email: schema.string({ escape: true, trim: true }, [rules.email()]),
     password: schema.string({ escape: true, trim: true }, []),
-    first_name: schema.string({ escape: true, trim: true }, []),
-    middle_name: schema.string.nullable({ escape: true, trim: true }, []),
-    last_name: schema.string({ escape: true, trim: true }, []),
+    name: schema.string({ escape: true, trim: true }, []),
   })
 
   /**

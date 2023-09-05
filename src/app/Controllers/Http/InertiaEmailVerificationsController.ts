@@ -26,10 +26,10 @@ export default class InertiaEmailVerificationsController {
     return await Mail.sendLater((message) => {
       message
         .from(request.completeUrl())
-        .to(user.email, user.getName())
-        .subject(`welcome to application! ${user.getName()}`)
+        .to(user.email, user.name)
+        .subject(`welcome to application! ${user.name}`)
         .htmlView('partials/email', {
-          user: { fullName: user.getName() },
+          user: { fullName: user.name },
           url: `${request.protocol()}://${request.host()}${url}&email=${user.email}`,
         })
     })

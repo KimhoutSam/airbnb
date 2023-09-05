@@ -46,11 +46,7 @@ export default class UsersController {
     try {
       const user = await auth.use('web').verifyCredentials(data.email, data.password)
 
-      user.firstName = data.first_name
-
-      user.lastName = data.last_name
-
-      user.middleName = data.middle_name ?? null
+      user.name = data.name
 
       await user.save()
 

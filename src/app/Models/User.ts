@@ -13,13 +13,7 @@ export default class User extends BaseModel {
   public password: string
 
   @column()
-  public firstName: string
-
-  @column()
-  public lastName: string
-
-  @column()
-  public middleName: string | null
+  public name: string
 
   @column()
   public emailVerifiedAt: DateTime
@@ -56,7 +50,7 @@ export default class User extends BaseModel {
     if (user.avatar === null) {
       const { generateFromString } = await import('generate-avatar')
 
-      user.avatar = `data:image/svg+xml;utf8,${generateFromString(user.getName())}`
+      user.avatar = `data:image/svg+xml;utf8,${generateFromString(user.name)}`
     }
 
     if (user.$dirty.password) {
